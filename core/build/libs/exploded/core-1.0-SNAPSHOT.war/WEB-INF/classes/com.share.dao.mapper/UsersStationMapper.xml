@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.share.dao.mapper.UsersStationMapper">
+  <resultMap id="BaseResultMap" type="com.share.entity.UsersStation">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="user_name" jdbcType="VARCHAR" property="userName" />
+    <result column="user_password" jdbcType="VARCHAR" property="userPassword" />
+    <result column="user_role" jdbcType="CHAR" property="userRole" />
+    <result column="user_login_time" jdbcType="TIMESTAMP" property="userLoginTime" />
+    <result column="user_regist_time" jdbcType="TIMESTAMP" property="userRegistTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, user_name, user_password, user_role, user_login_time, user_regist_time
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from users_station
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+
+  <select id="getUsersStationByUsername" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from users_station
+    where user_name = #{id,jdbcType=VARCHAR}
+  </select>
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from users_station
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.share.entity.UsersStation">
+    insert into users_station (id, user_name, user_password, 
+      user_role, user_login_time, user_regist_time
+      )
+    values (#{id,jdbcType=BIGINT}, #{userName,jdbcType=VARCHAR}, #{userPassword,jdbcType=VARCHAR}, 
+      #{userRole,jdbcType=CHAR}, #{userLoginTime,jdbcType=TIMESTAMP}, #{userRegistTime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.share.entity.UsersStation">
+    insert into users_station
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="userName != null">
+        user_name,
+      </if>
+      <if test="userPassword != null">
+        user_password,
+      </if>
+      <if test="userRole != null">
+        user_role,
+      </if>
+      <if test="userLoginTime != null">
+        user_login_time,
+      </if>
+      <if test="userRegistTime != null">
+        user_regist_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="userName != null">
+        #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="userPassword != null">
+        #{userPassword,jdbcType=VARCHAR},
+      </if>
+      <if test="userRole != null">
+        #{userRole,jdbcType=CHAR},
+      </if>
+      <if test="userLoginTime != null">
+        #{userLoginTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="userRegistTime != null">
+        #{userRegistTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.share.entity.UsersStation">
+    update users_station
+    <set>
+      <if test="userName != null">
+        user_name = #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="userPassword != null">
+        user_password = #{userPassword,jdbcType=VARCHAR},
+      </if>
+      <if test="userRole != null">
+        user_role = #{userRole,jdbcType=CHAR},
+      </if>
+      <if test="userLoginTime != null">
+        user_login_time = #{userLoginTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="userRegistTime != null">
+        user_regist_time = #{userRegistTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.share.entity.UsersStation">
+    update users_station
+    set user_name = #{userName,jdbcType=VARCHAR},
+      user_password = #{userPassword,jdbcType=VARCHAR},
+      user_role = #{userRole,jdbcType=CHAR},
+      user_login_time = #{userLoginTime,jdbcType=TIMESTAMP},
+      user_regist_time = #{userRegistTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

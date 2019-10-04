@@ -1,0 +1,8 @@
+// 所有子项目的通用配置
+subprojects {
+    apply plugin: 'idea'
+
+    group 'com.share'
+    version '1.0-SNAPSHOT'
+
+}
