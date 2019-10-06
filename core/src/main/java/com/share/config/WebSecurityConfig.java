@@ -1,9 +1,6 @@
 package com.share.config;
 
-import com.share.handler.AuthenticationEntryPointImpl;
-import com.share.handler.AuthenticationFailHandler;
-import com.share.handler.AuthenticationSuccessHandler;
-import com.share.handler.JwtAuthenticationFilter;
+import com.share.handler.*;
 import com.share.service.DatabaseUserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -46,17 +43,20 @@ public class WebSecurityConfig {
         @Autowired
         private JwtAuthenticationFilter jwtAuthenticationFilter;
 
+        @Autowired
+        private AuthenticationLogoutHandler authenticationLogoutHandler;
+
         @Override
         protected void configure(HttpSecurity http) throws Exception {
             http.addFilterAfter(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)
                     .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                     .and().csrf().disable().authorizeRequests()
-                    .antMatchers("/static/**", "/index.jsp", "/api/signup").permitAll()
+                    .antMatchers("/static/**", "/index.jsp", "/api/signup", "/api/logout").permitAll()
                     .anyRequest().authenticated()
                     .and().formLogin().loginProcessingUrl("/api/login")
-//                    .and().logout().addLogoutHandler()
                     .successHandler(successHandler)
                     .failureHandler(failHandler)
+                    .and().logout().logoutUrl("/api/logout").addLogoutHandler(authenticationLogoutHandler)
                     .and().exceptionHandling().authenticationEntryPoint(entryPoint);
         }
 
