@@ -14,7 +14,7 @@ cmake-build-release/
 *.iws
 
 # IntelliJ
-out/
+/**/out/
 
 # JIRA plugin
 atlassian-ide-plugin.xml
@@ -32,7 +32,7 @@ fabric.properties
 .idea/httpRequests
 ### Gradle template
 .gradle
-/build/
+/**/build/
 
 # Ignore Gradle GUI config
 gradle-app.setting
