@@ -27,7 +27,7 @@ public class AuthenticationSuccessHandler extends SavedRequestAwareAuthenticatio
         response.setCharacterEncoding(CommonEnum.UTF_8.getName());
         response.setContentType(CommonEnum.APPLICATION_JSON.getName());
         response.getWriter()
-                .println("{\"tokenType\":\"Bearer\",\"token\": \""
+                .println("{\"code\":\"200\",\"tokenType\":\"Bearer\",\"token\": \""
                         + jwtTokenProvider.createJwtToken(authentication) + "\"}");
 
     }
