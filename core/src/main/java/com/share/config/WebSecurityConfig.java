@@ -62,7 +62,12 @@ public class WebSecurityConfig {
 
         @Override
         protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-            auth.userDetailsService(databaseUserDetailsService).passwordEncoder(new Md5PasswordEncoder(){
+            auth.userDetailsService(databaseUserDetailsService).passwordEncoder(getMd5PasswordEncoder());
+        }
+
+        @Bean("md5PasswordEncoder")
+        public Md5PasswordEncoder getMd5PasswordEncoder() {
+            return new Md5PasswordEncoder(){
                 @Override
                 public String encodePassword(String rawPass, Object salt) {
                     return super.encodePassword(rawPass, "");
@@ -72,7 +77,7 @@ public class WebSecurityConfig {
                 public boolean isPasswordValid(String encPass, String rawPass, Object salt) {
                     return super.isPasswordValid(encPass, rawPass, "");
                 }
-            });
+            };
         }
 
         @Bean
@@ -80,5 +85,7 @@ public class WebSecurityConfig {
         public AuthenticationManager authenticationManagerBean() throws Exception {
             return super.authenticationManagerBean();
         }
+
+
     }
 }

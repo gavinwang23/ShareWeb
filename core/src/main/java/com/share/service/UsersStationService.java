@@ -51,4 +51,7 @@ public class UsersStationService {
     }
 
 
+    public void insertNewUsersStation(UsersStation usersStation) {
+        usersStationMapper.insert(usersStation);
+    }
 }

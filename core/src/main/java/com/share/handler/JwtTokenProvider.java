@@ -1,5 +1,6 @@
 package com.share.handler;
 
+import com.share.entity.UsersStation;
 import io.jsonwebtoken.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -33,6 +34,19 @@ public class JwtTokenProvider {
                 .setIssuedAt(new Date())
                 .signWith(SignatureAlgorithm.HS512, SECRET)
 //                .setClaims(claims)
+                .compact();
+
+        return token;
+    }
+
+    public String createJwtTokenWhenSignUp(UsersStation usersStation) {
+        String username = usersStation.getUserName();
+        Date expireTime = new Date(System.currentTimeMillis() + EXPIRE_TIME);
+        Map claims = new HashMap();
+        String token = Jwts.builder().setSubject(username)
+                .setExpiration(expireTime)
+                .setIssuedAt(new Date())
+                .signWith(SignatureAlgorithm.HS512, SECRET)
                 .compact();
 
         return token;
