@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.encoding.Md5PasswordEncoder;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -48,10 +49,15 @@ public class WebSecurityConfig {
 
         @Override
         protected void configure(HttpSecurity http) throws Exception {
-            http.addFilterAfter(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)
+            http
+                    .addFilterAfter(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)
                     .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-                    .and().csrf().disable().authorizeRequests()
-                    .antMatchers("/static/**", "/index.jsp", "/api/signup", "/api/logout").permitAll()
+                    .and().csrf().disable()
+                    .authorizeRequests()
+                    .antMatchers("/static/**", "/index.jsp", "/api/signup", "/api/logout")
+                    .permitAll()
+                    .antMatchers(HttpMethod.OPTIONS)
+                    .permitAll()
                     .anyRequest().authenticated()
                     .and().formLogin().loginProcessingUrl("/api/login")
                     .successHandler(successHandler)
@@ -85,6 +91,7 @@ public class WebSecurityConfig {
         public AuthenticationManager authenticationManagerBean() throws Exception {
             return super.authenticationManagerBean();
         }
+
 
 
     }
