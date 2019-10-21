@@ -46,4 +46,9 @@ public class UsersStationRest {
         usersStationService.insertNewUsersStation(usersStation);
         return jwtTokenProvider.createJwtTokenWhenSignUp(usersStation);
     }
+
+    @PostMapping("test")
+    public void test(){
+        throw new RuntimeException("test exception");
+    }
 }

@@ -54,7 +54,7 @@ public class WebSecurityConfig {
                     .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                     .and().csrf().disable()
                     .authorizeRequests()
-                    .antMatchers("/static/**", "/index.jsp", "/api/sign_up", "/api/logout")
+                    .antMatchers("/static/**", "/index.jsp", "/api/sign_up", "/api/logout", "/api/test")
                     .permitAll()
                     .antMatchers(HttpMethod.OPTIONS)
                     .permitAll()
