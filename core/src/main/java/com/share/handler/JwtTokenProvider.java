@@ -27,13 +27,10 @@ public class JwtTokenProvider {
         User user = (User) authentication.getPrincipal();
         String username = user.getUsername();
         Date expireTime = new Date(System.currentTimeMillis() + EXPIRE_TIME);
-        Map claims = new HashMap();
-        claims.put("roles", user.getAuthorities());
         String token = Jwts.builder().setSubject(username)
                 .setExpiration(expireTime)
                 .setIssuedAt(new Date())
                 .signWith(SignatureAlgorithm.HS512, SECRET)
-//                .setClaims(claims)
                 .compact();
 
         return token;
@@ -42,7 +39,6 @@ public class JwtTokenProvider {
     public String createJwtTokenWhenSignUp(UsersStation usersStation) {
         String username = usersStation.getUserName();
         Date expireTime = new Date(System.currentTimeMillis() + EXPIRE_TIME);
-        Map claims = new HashMap();
         String token = Jwts.builder().setSubject(username)
                 .setExpiration(expireTime)
                 .setIssuedAt(new Date())

@@ -3,6 +3,7 @@ package com.share.entity;
 import java.util.Date;
 
 public class UsersStation {
+
     private Long id;
 
     private String userName;

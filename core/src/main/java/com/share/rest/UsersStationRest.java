@@ -41,7 +41,7 @@ public class UsersStationRest {
         usersStation.setUserPassword(md5PasswordEncoder.encodePassword(usersStation.getUserPassword(), ""));
         usersStation.setUserRegistTime(new Date());
         usersStation.setUserLoginTime(usersStation.getUserRegistTime());
-        usersStation.setUserRole(CommonEnum.USER_ROLE_GUEST.getName());
+        usersStation.setUserRole(CommonEnum.USER_ROLE_COMMON.getName());
 
         usersStationService.insertNewUsersStation(usersStation);
         return jwtTokenProvider.createJwtTokenWhenSignUp(usersStation);
