@@ -36,6 +36,11 @@ public class UsersStationRest {
         return usersStationService.getUsersStationById(id);
     }
 
+    @RequestMapping("/get/{username}")
+    public Boolean isUsernameDuplicated(@PathVariable String username) {
+        return usersStationService.isUsernameDuplicated(username);
+    }
+
     @PostMapping("sign_up")
     public String userSignUp(UsersStation usersStation) {
         usersStation.setUserPassword(md5PasswordEncoder.encodePassword(usersStation.getUserPassword(), ""));

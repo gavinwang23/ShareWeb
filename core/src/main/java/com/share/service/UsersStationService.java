@@ -54,4 +54,9 @@ public class UsersStationService {
     public void insertNewUsersStation(UsersStation usersStation) {
         usersStationMapper.insert(usersStation);
     }
+
+    public Boolean isUsernameDuplicated(String username) {
+        List<UsersStation> users = usersStationMapper.getUsersStationByUsername(username);
+        return !users.isEmpty();
+    }
 }
