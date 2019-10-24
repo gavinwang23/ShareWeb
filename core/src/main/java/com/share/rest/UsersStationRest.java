@@ -36,7 +36,7 @@ public class UsersStationRest {
         return usersStationService.getUsersStationById(id);
     }
 
-    @GetMapping("/get/{username}")
+    @GetMapping("/is_username_duplicated/{username}")
     public Boolean isUsernameDuplicated(@PathVariable String username) {
         return usersStationService.isUsernameDuplicated(username);
     }
