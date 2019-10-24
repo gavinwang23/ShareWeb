@@ -25,18 +25,18 @@ public class UsersStationRest {
     @Autowired
     private JwtTokenProvider jwtTokenProvider;
 
-    @RequestMapping("/hello")
+    @GetMapping("/hello")
     public String helloCxfServices() {
         return "Hello world.";
     }
 
-    @RequestMapping("/get/{id}")
+    @GetMapping("/get/{id}")
     @PreAuthorize("hasAnyAuthority('ADMIN')")
     public UsersStation getUsersFromMysql(@PathVariable Long id) {
         return usersStationService.getUsersStationById(id);
     }
 
-    @RequestMapping("/get/{username}")
+    @GetMapping("/get/{username}")
     public Boolean isUsernameDuplicated(@PathVariable String username) {
         return usersStationService.isUsernameDuplicated(username);
     }
