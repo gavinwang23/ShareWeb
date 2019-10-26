@@ -56,7 +56,9 @@ public class UsersStationService {
     }
 
     public Boolean isUsernameDuplicated(String username) {
-        List<UsersStation> users = usersStationMapper.getUsersStationByUsername(username);
+        List<UsersStation> users = getUsersStationByUsername(username);
         return !users.isEmpty();
     }
+
+
 }

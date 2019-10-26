@@ -24,8 +24,8 @@ public class AuthenticationSuccessHandler extends SavedRequestAwareAuthenticatio
 
     private void returnJson(HttpServletResponse response, Authentication authentication) throws IOException {
         response.setStatus(HttpServletResponse.SC_OK);
-        response.setCharacterEncoding(CommonEnum.UTF_8.getName());
-        response.setContentType(CommonEnum.APPLICATION_JSON.getName());
+        response.setCharacterEncoding(CommonEnum.UTF_8.getMessage());
+        response.setContentType(CommonEnum.APPLICATION_JSON.getMessage());
         response.getWriter()
                 .println("{\"code\":\"200\",\"tokenType\":\"Bearer\",\"token\": \""
                         + jwtTokenProvider.createJwtToken(authentication) + "\"}");

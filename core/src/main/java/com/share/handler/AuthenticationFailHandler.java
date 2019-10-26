@@ -19,8 +19,8 @@ public class AuthenticationFailHandler extends SimpleUrlAuthenticationFailureHan
 
     private void returnJson(HttpServletResponse response, AuthenticationException exception) throws IOException {
         response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
-        response.setCharacterEncoding(CommonEnum.UTF_8.getName());
-        response.setContentType(CommonEnum.APPLICATION_JSON.getName());
+        response.setCharacterEncoding(CommonEnum.UTF_8.getMessage());
+        response.setContentType(CommonEnum.APPLICATION_JSON.getMessage());
         response.getWriter().println("{\"exceptionId\":\"null\",\"messageCode\":\"401\"," +
                 "\"message\": \""+ exception.getMessage() +"\",\"serverTime\": " + System.currentTimeMillis() +"}");
     }
