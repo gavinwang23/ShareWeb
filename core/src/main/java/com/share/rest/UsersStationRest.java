@@ -28,11 +28,7 @@ import java.util.Map;
 @RestController
 @RequestMapping("/api")
 @ResponseBody
-public class UsersStationRest {
-
-    private ServletRequestAttributes attributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
-    private HttpServletRequest request = attributes.getRequest();
-    private HttpServletResponse response = attributes.getResponse();
+public class UsersStationRest extends BaseController {
 
     @Autowired
     private Md5PasswordEncoder md5PasswordEncoder;
