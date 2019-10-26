@@ -16,6 +16,26 @@ public class UsersStation {
 
     private Date userRegistTime;
 
+    private String userStatus;
+
+    private Date userForbiddenTime;
+
+    public String getUserStatus() {
+        return userStatus;
+    }
+
+    public void setUserStatus(String userStatus) {
+        this.userStatus = userStatus;
+    }
+
+    public Date getUserForbiddenTime() {
+        return userForbiddenTime;
+    }
+
+    public void setUserForbiddenTime(Date userForbiddenTime) {
+        this.userForbiddenTime = userForbiddenTime;
+    }
+
     public Long getId() {
         return id;
     }

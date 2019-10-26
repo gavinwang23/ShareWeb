@@ -2,9 +2,11 @@ package com.share.dao.mapper;
 
 import com.share.entity.UsersStation;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Component;
 
+import java.util.Date;
 import java.util.List;
 
 @Mapper
@@ -22,5 +24,7 @@ public interface UsersStationMapper {
 
     int updateByPrimaryKey(UsersStation record);
 
-    List<UsersStation> getUsersStationByUsername(String username);
+    List<UsersStation> getUsersStationByUsername(@Param("userName") String username);
+
+    int updateLoginTimeByUserName(@Param("userName") String username, @Param("loginTime") Date loginTime);
 }

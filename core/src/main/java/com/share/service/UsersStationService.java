@@ -15,6 +15,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -60,5 +61,7 @@ public class UsersStationService {
         return !users.isEmpty();
     }
 
-
+    public void updateLoginTimeByUserName(String name, Date date) {
+        usersStationMapper.updateLoginTimeByUserName(name, date);
+    }
 }

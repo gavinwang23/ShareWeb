@@ -11,7 +11,7 @@
  Target Server Version : 80017
  File Encoding         : 65001
 
- Date: 23/10/2019 20:53:56
+ Date: 26/10/2019 23:25:38
 */
 
 SET NAMES utf8mb4;
@@ -28,6 +28,8 @@ CREATE TABLE `users_station`  (
   `user_role` enum('ADMIN','COMMON','GUEST') CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT 'GUEST' COMMENT '用户角色',
   `user_login_time` datetime(0) NOT NULL COMMENT '用户登录时间',
   `user_regist_time` datetime(0) NOT NULL COMMENT '用户注册时间',
+  `user_status` enum('NORMAL','FORBIDDEN','VIP1','VIP2') CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT 'NORMAL' COMMENT '用户状态',
+  `user_forbidden_time` datetime(0) NULL DEFAULT NULL COMMENT '用户禁言时间',
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `name`(`user_name`(10)) USING BTREE COMMENT '用户名索引'
 ) ENGINE = InnoDB AUTO_INCREMENT = 4 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
@@ -35,8 +37,8 @@ CREATE TABLE `users_station`  (
 -- ----------------------------
 -- Records of users_station
 -- ----------------------------
-INSERT INTO `users_station` VALUES (1, '11111', '	b0baee9d279d34fa1dfd71aadb908c3f', 'ADMIN', '2019-09-30 19:50:31', '2019-09-30 19:50:35');
-INSERT INTO `users_station` VALUES (2, 'yiranqingqing', '6a204bd89f3c8348afd5c77c717a097a', 'COMMON', '2019-10-03 10:08:31', '2019-10-03 10:08:36');
-INSERT INTO `users_station` VALUES (3, '22222', '3d2172418ce305c7d16d4b05597c6a59', 'COMMON', '2019-10-21 13:07:42', '2019-10-21 13:07:42');
+INSERT INTO `users_station` VALUES (1, '11111', '	b0baee9d279d34fa1dfd71aadb908c3f', 'ADMIN', '2019-10-26 15:23:45', '2019-09-30 19:50:35', 'NORMAL', NULL);
+INSERT INTO `users_station` VALUES (2, 'yiranqingqing', '6a204bd89f3c8348afd5c77c717a097a', 'COMMON', '2019-10-03 10:08:31', '2019-10-03 10:08:36', 'NORMAL', NULL);
+INSERT INTO `users_station` VALUES (3, '22222', '3d2172418ce305c7d16d4b05597c6a59', 'COMMON', '2019-10-21 13:07:42', '2019-10-21 13:07:42', 'NORMAL', NULL);
 
 SET FOREIGN_KEY_CHECKS = 1;
