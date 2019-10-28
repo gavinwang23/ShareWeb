@@ -7,7 +7,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 public class BaseController {
-// 这些对象何以直接被子类使用
+    // 这些对象何以直接被子类使用
     protected HttpServletRequest request;
     protected HttpServletResponse response;
     protected HttpSession session;

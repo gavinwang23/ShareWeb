@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.share.dao.mapper.ArticleStationMapper">
+  <resultMap id="BaseResultMap" type="com.share.entity.ArticleStation">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="article_title" jdbcType="VARCHAR" property="articleTitle" />
+    <result column="article_admire" jdbcType="INTEGER" property="articleAdmire" />
+    <result column="user_name" jdbcType="VARCHAR" property="userName" />
+    <result column="article_oppose" jdbcType="INTEGER" property="articleOppose" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.share.entity.ArticleStation">
+    <result column="article_content" jdbcType="LONGVARCHAR" property="articleContent" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, article_title, article_admire, user_name, article_oppose
+  </sql>
+  <sql id="Blob_Column_List">
+    article_content
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from article_station
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from article_station
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.share.entity.ArticleStation">
+    insert into article_station (id, article_title, article_admire, 
+      user_name, article_oppose, article_content
+      )
+    values (#{id,jdbcType=BIGINT}, #{articleTitle,jdbcType=VARCHAR}, #{articleAdmire,jdbcType=INTEGER}, 
+      #{userName,jdbcType=VARCHAR}, #{articleOppose,jdbcType=INTEGER}, #{articleContent,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.share.entity.ArticleStation">
+    insert into article_station
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="articleTitle != null">
+        article_title,
+      </if>
+      <if test="articleAdmire != null">
+        article_admire,
+      </if>
+      <if test="userName != null">
+        user_name,
+      </if>
+      <if test="articleOppose != null">
+        article_oppose,
+      </if>
+      <if test="articleContent != null">
+        article_content,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="articleTitle != null">
+        #{articleTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="articleAdmire != null">
+        #{articleAdmire,jdbcType=INTEGER},
+      </if>
+      <if test="userName != null">
+        #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="articleOppose != null">
+        #{articleOppose,jdbcType=INTEGER},
+      </if>
+      <if test="articleContent != null">
+        #{articleContent,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.share.entity.ArticleStation">
+    update article_station
+    <set>
+      <if test="articleTitle != null">
+        article_title = #{articleTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="articleAdmire != null">
+        article_admire = #{articleAdmire,jdbcType=INTEGER},
+      </if>
+      <if test="userName != null">
+        user_name = #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="articleOppose != null">
+        article_oppose = #{articleOppose,jdbcType=INTEGER},
+      </if>
+      <if test="articleContent != null">
+        article_content = #{articleContent,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.share.entity.ArticleStation">
+    update article_station
+    set article_title = #{articleTitle,jdbcType=VARCHAR},
+      article_admire = #{articleAdmire,jdbcType=INTEGER},
+      user_name = #{userName,jdbcType=VARCHAR},
+      article_oppose = #{articleOppose,jdbcType=INTEGER},
+      article_content = #{articleContent,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.share.entity.ArticleStation">
+    update article_station
+    set article_title = #{articleTitle,jdbcType=VARCHAR},
+      article_admire = #{articleAdmire,jdbcType=INTEGER},
+      user_name = #{userName,jdbcType=VARCHAR},
+      article_oppose = #{articleOppose,jdbcType=INTEGER}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

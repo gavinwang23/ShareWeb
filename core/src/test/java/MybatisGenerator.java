@@ -12,7 +12,7 @@ public class MybatisGenerator {
         List<String> warnings = new ArrayList<String>();
         boolean overwrite = true;
         // 指定配置文件
-        File configFile = new File("F:\\restful_server\\src\\test\\resources\\mybatis-generator-config.xml");
+        File configFile = new File("F:\\web\\core\\src\\test\\resources\\mybatis-generator-config.xml");
         ConfigurationParser cp = new ConfigurationParser(warnings);
         Configuration config = cp.parseConfiguration(configFile);
         DefaultShellCallback callback = new DefaultShellCallback(overwrite);

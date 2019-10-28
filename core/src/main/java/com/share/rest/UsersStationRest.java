@@ -87,8 +87,4 @@ public class UsersStationRest extends BaseController {
         servletOutputStream.close();
     }
 
-    @PostMapping("test")
-    public void test(){
-        throw new RuntimeException("test exception");
-    }
 }
