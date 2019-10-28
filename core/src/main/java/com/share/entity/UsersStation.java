@@ -1,9 +1,9 @@
 package com.share.entity;
 
+import java.math.BigDecimal;
 import java.util.Date;
 
 public class UsersStation {
-
     private Long id;
 
     private String userName;
@@ -20,21 +20,25 @@ public class UsersStation {
 
     private Date userForbiddenTime;
 
-    public String getUserStatus() {
-        return userStatus;
-    }
+    private BigDecimal userMoney;
 
-    public void setUserStatus(String userStatus) {
-        this.userStatus = userStatus;
-    }
+    private Date userVipLostTime;
 
-    public Date getUserForbiddenTime() {
-        return userForbiddenTime;
-    }
+    private Date userVipInitTime;
 
-    public void setUserForbiddenTime(Date userForbiddenTime) {
-        this.userForbiddenTime = userForbiddenTime;
-    }
+    private Boolean userVipValid;
+
+    private Integer userPhoneNumber;
+
+    private String userEmail;
+
+    private String userAddress;
+
+    private Integer userPoints;
+
+    private String userPasswordQuestion;
+
+    private String userPasswordAnswer;
 
     public Long getId() {
         return id;
@@ -82,5 +86,101 @@ public class UsersStation {
 
     public void setUserRegistTime(Date userRegistTime) {
         this.userRegistTime = userRegistTime;
+    }
+
+    public String getUserStatus() {
+        return userStatus;
+    }
+
+    public void setUserStatus(String userStatus) {
+        this.userStatus = userStatus == null ? null : userStatus.trim();
+    }
+
+    public Date getUserForbiddenTime() {
+        return userForbiddenTime;
+    }
+
+    public void setUserForbiddenTime(Date userForbiddenTime) {
+        this.userForbiddenTime = userForbiddenTime;
+    }
+
+    public BigDecimal getUserMoney() {
+        return userMoney;
+    }
+
+    public void setUserMoney(BigDecimal userMoney) {
+        this.userMoney = userMoney;
+    }
+
+    public Date getUserVipLostTime() {
+        return userVipLostTime;
+    }
+
+    public void setUserVipLostTime(Date userVipLostTime) {
+        this.userVipLostTime = userVipLostTime;
+    }
+
+    public Date getUserVipInitTime() {
+        return userVipInitTime;
+    }
+
+    public void setUserVipInitTime(Date userVipInitTime) {
+        this.userVipInitTime = userVipInitTime;
+    }
+
+    public Boolean getUserVipValid() {
+        return userVipValid;
+    }
+
+    public void setUserVipValid(Boolean userVipValid) {
+        this.userVipValid = userVipValid;
+    }
+
+    public Integer getUserPhoneNumber() {
+        return userPhoneNumber;
+    }
+
+    public void setUserPhoneNumber(Integer userPhoneNumber) {
+        this.userPhoneNumber = userPhoneNumber;
+    }
+
+    public String getUserEmail() {
+        return userEmail;
+    }
+
+    public void setUserEmail(String userEmail) {
+        this.userEmail = userEmail == null ? null : userEmail.trim();
+    }
+
+    public String getUserAddress() {
+        return userAddress;
+    }
+
+    public void setUserAddress(String userAddress) {
+        this.userAddress = userAddress == null ? null : userAddress.trim();
+    }
+
+    public Integer getUserPoints() {
+        return userPoints;
+    }
+
+    public void setUserPoints(Integer userPoints) {
+        this.userPoints = userPoints;
+    }
+
+    public String getUserPasswordQuestion() {
+        return userPasswordQuestion;
+    }
+
+    public void setUserPasswordQuestion(String userPasswordQuestion) {
+        this.userPasswordQuestion = userPasswordQuestion == null ? null : userPasswordQuestion.trim();
+    }
+
+    public String getUserPasswordAnswer() {
+        return userPasswordAnswer;
+    }
+
+    public void setUserPasswordAnswer(String userPasswordAnswer) {
+        this.userPasswordAnswer = userPasswordAnswer == null ? null : userPasswordAnswer.trim();
     }
 }

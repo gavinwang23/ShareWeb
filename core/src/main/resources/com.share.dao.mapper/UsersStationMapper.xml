@@ -10,9 +10,22 @@
     <result column="user_regist_time" jdbcType="TIMESTAMP" property="userRegistTime" />
     <result column="user_status" jdbcType="CHAR" property="userStatus" />
     <result column="user_forbidden_time" jdbcType="TIMESTAMP" property="userForbiddenTime" />
+    <result column="user_money" jdbcType="DECIMAL" property="userMoney" />
+    <result column="user_vip_lost_time" jdbcType="TIMESTAMP" property="userVipLostTime" />
+    <result column="user_vip_init_time" jdbcType="TIMESTAMP" property="userVipInitTime" />
+    <result column="user_vip_valid" jdbcType="BIT" property="userVipValid" />
+    <result column="user_phone_number" jdbcType="INTEGER" property="userPhoneNumber" />
+    <result column="user_email" jdbcType="VARCHAR" property="userEmail" />
+    <result column="user_address" jdbcType="VARCHAR" property="userAddress" />
+    <result column="user_points" jdbcType="INTEGER" property="userPoints" />
+    <result column="user_password_question" jdbcType="VARCHAR" property="userPasswordQuestion" />
+    <result column="user_password_answer" jdbcType="VARCHAR" property="userPasswordAnswer" />
   </resultMap>
   <sql id="Base_Column_List">
-    id, user_name, user_password, user_role, user_login_time, user_regist_time, user_status, user_forbidden_time
+    id, user_name, user_password, user_role, user_login_time, user_regist_time, user_status,
+    user_forbidden_time, user_money, user_vip_lost_time, user_vip_init_time, user_vip_valid,
+    user_phone_number, user_email, user_address, user_points, user_password_question,
+    user_password_answer
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
     select 
@@ -34,10 +47,18 @@
   </delete>
   <insert id="insert" parameterType="com.share.entity.UsersStation">
     insert into users_station (id, user_name, user_password, 
-      user_role, user_login_time, user_regist_time, user_status, user_forbidden_time
+      user_role, user_login_time, user_regist_time,
+      user_status, user_forbidden_time, user_money,
+      user_vip_lost_time, user_vip_init_time, user_vip_valid,
+      user_phone_number, user_email, user_address,
+      user_points, user_password_question, user_password_answer
       )
-    values (#{id,jdbcType=BIGINT}, #{userName,jdbcType=VARCHAR}, #{userPassword,jdbcType=VARCHAR}, 
-      #{userRole,jdbcType=CHAR}, #{userLoginTime,jdbcType=TIMESTAMP}, #{userRegistTime,jdbcType=TIMESTAMP}
+    values (#{id,jdbcType=BIGINT}, #{userName,jdbcType=VARCHAR}, #{userPassword,jdbcType=VARCHAR},
+      #{userRole,jdbcType=CHAR}, #{userLoginTime,jdbcType=TIMESTAMP}, #{userRegistTime,jdbcType=TIMESTAMP},
+      #{userStatus,jdbcType=CHAR}, #{userForbiddenTime,jdbcType=TIMESTAMP}, #{userMoney,jdbcType=DECIMAL},
+      #{userVipLostTime,jdbcType=TIMESTAMP}, #{userVipInitTime,jdbcType=TIMESTAMP}, #{userVipValid,jdbcType=BIT},
+      #{userPhoneNumber,jdbcType=INTEGER}, #{userEmail,jdbcType=VARCHAR}, #{userAddress,jdbcType=VARCHAR},
+      #{userPoints,jdbcType=INTEGER}, #{userPasswordQuestion,jdbcType=VARCHAR}, #{userPasswordAnswer,jdbcType=VARCHAR}
       )
   </insert>
   <insert id="insertSelective" parameterType="com.share.entity.UsersStation">
@@ -67,6 +88,36 @@
       <if test="userForbiddenTime != null">
         user_forbidden_time,
       </if>
+      <if test="userMoney != null">
+        user_money,
+      </if>
+      <if test="userVipLostTime != null">
+        user_vip_lost_time,
+      </if>
+      <if test="userVipInitTime != null">
+        user_vip_init_time,
+      </if>
+      <if test="userVipValid != null">
+        user_vip_valid,
+      </if>
+      <if test="userPhoneNumber != null">
+        user_phone_number,
+      </if>
+      <if test="userEmail != null">
+        user_email,
+      </if>
+      <if test="userAddress != null">
+        user_address,
+      </if>
+      <if test="userPoints != null">
+        user_points,
+      </if>
+      <if test="userPasswordQuestion != null">
+        user_password_question,
+      </if>
+      <if test="userPasswordAnswer != null">
+        user_password_answer,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -93,6 +144,36 @@
       <if test="userForbiddenTime != null">
         #{userForbiddenTime,jdbcType=TIMESTAMP},
       </if>
+      <if test="userMoney != null">
+        #{userMoney,jdbcType=DECIMAL},
+      </if>
+      <if test="userVipLostTime != null">
+        #{userVipLostTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="userVipInitTime != null">
+        #{userVipInitTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="userVipValid != null">
+        #{userVipValid,jdbcType=BIT},
+      </if>
+      <if test="userPhoneNumber != null">
+        #{userPhoneNumber,jdbcType=INTEGER},
+      </if>
+      <if test="userEmail != null">
+        #{userEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="userAddress != null">
+        #{userAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="userPoints != null">
+        #{userPoints,jdbcType=INTEGER},
+      </if>
+      <if test="userPasswordQuestion != null">
+        #{userPasswordQuestion,jdbcType=VARCHAR},
+      </if>
+      <if test="userPasswordAnswer != null">
+        #{userPasswordAnswer,jdbcType=VARCHAR},
+      </if>
     </trim>
   </insert>
   <update id="updateByPrimaryKeySelective" parameterType="com.share.entity.UsersStation">
@@ -113,11 +194,41 @@
       <if test="userRegistTime != null">
         user_regist_time = #{userRegistTime,jdbcType=TIMESTAMP},
       </if>
+      <if test="userStatus != null">
+        user_status = #{userStatus,jdbcType=CHAR},
+      </if>
       <if test="userForbiddenTime != null">
         user_forbidden_time = #{userForbiddenTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="userStatus != null">
-        user_status = #{userStatus,jdbcType=CHAR},
+      <if test="userMoney != null">
+        user_money = #{userMoney,jdbcType=DECIMAL},
+      </if>
+      <if test="userVipLostTime != null">
+        user_vip_lost_time = #{userVipLostTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="userVipInitTime != null">
+        user_vip_init_time = #{userVipInitTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="userVipValid != null">
+        user_vip_valid = #{userVipValid,jdbcType=BIT},
+      </if>
+      <if test="userPhoneNumber != null">
+        user_phone_number = #{userPhoneNumber,jdbcType=INTEGER},
+      </if>
+      <if test="userEmail != null">
+        user_email = #{userEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="userAddress != null">
+        user_address = #{userAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="userPoints != null">
+        user_points = #{userPoints,jdbcType=INTEGER},
+      </if>
+      <if test="userPasswordQuestion != null">
+        user_password_question = #{userPasswordQuestion,jdbcType=VARCHAR},
+      </if>
+      <if test="userPasswordAnswer != null">
+        user_password_answer = #{userPasswordAnswer,jdbcType=VARCHAR},
       </if>
     </set>
     where id = #{id,jdbcType=BIGINT}
@@ -135,9 +246,19 @@
       user_password = #{userPassword,jdbcType=VARCHAR},
       user_role = #{userRole,jdbcType=CHAR},
       user_login_time = #{userLoginTime,jdbcType=TIMESTAMP},
-      user_regist_time = #{userRegistTime,jdbcType=TIMESTAMP}
-      user_forbidden_time = #{userForbiddenTime,jdbcType=TIMESTAMP}
-      user_status = #{userStatus,jdbcType=CHAR}
+      user_regist_time = #{userRegistTime,jdbcType=TIMESTAMP},
+      user_status = #{userStatus,jdbcType=CHAR},
+      user_forbidden_time = #{userForbiddenTime,jdbcType=TIMESTAMP},
+      user_money = #{userMoney,jdbcType=DECIMAL},
+      user_vip_lost_time = #{userVipLostTime,jdbcType=TIMESTAMP},
+      user_vip_init_time = #{userVipInitTime,jdbcType=TIMESTAMP},
+      user_vip_valid = #{userVipValid,jdbcType=BIT},
+      user_phone_number = #{userPhoneNumber,jdbcType=INTEGER},
+      user_email = #{userEmail,jdbcType=VARCHAR},
+      user_address = #{userAddress,jdbcType=VARCHAR},
+      user_points = #{userPoints,jdbcType=INTEGER},
+      user_password_question = #{userPasswordQuestion,jdbcType=VARCHAR},
+      user_password_answer = #{userPasswordAnswer,jdbcType=VARCHAR}
     where id = #{id,jdbcType=BIGINT}
   </update>
 </mapper>
