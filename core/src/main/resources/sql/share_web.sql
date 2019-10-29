@@ -25,16 +25,20 @@ CREATE TABLE `article_station`  (
   `id` bigint(32) NOT NULL AUTO_INCREMENT COMMENT '自增id',
   `article_title` varchar(64) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '文章标题',
   `article_content` text CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '文章内容',
-  `article_admire` int(10) NULL DEFAULT NULL COMMENT '文章被赞数',
+  `article_admire` int(10) DEFAULT NULL COMMENT '文章被赞数',
   `user_name` varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '文章用户名',
-  `article_oppose` int(10) NULL DEFAULT NULL COMMENT '文章反对数',
-  PRIMARY KEY (`id`) USING BTREE
+  `article_oppose` int(10) DEFAULT NULL COMMENT '文章反对数',
+  `article_brose` int(10) DEFAULT NULL COMMENT '文章浏览次数',
+  `article_publish_time` datetime NOT NULL COMMENT '文章发表时间',
+  `article_id_edit` int(32) DEFAULT NULL COMMENT '记录编辑文章的id',
+  `article_edit_time` datetime DEFAULT NULL COMMENT '记录编辑时间',
+  PRIMARY KEY (`id`) USING BTREE,
+  KEY `user_name_title_time` (`user_name`(10),`article_title`(10),`article_publish_time`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of article_station
 -- ----------------------------
-INSERT INTO `article_station` VALUES (1, 'tttttt', 'asdfasdf', 1, '11111', 19);
 
 -- ----------------------------
 -- Table structure for users_station

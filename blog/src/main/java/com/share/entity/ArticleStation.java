@@ -1,5 +1,7 @@
 package com.share.entity;
 
+import java.util.Date;
+
 public class ArticleStation {
     private Long id;
 
@@ -10,6 +12,14 @@ public class ArticleStation {
     private String userName;
 
     private Integer articleOppose;
+
+    private Integer articleBrose;
+
+    private Date articlePublishTime;
+
+    private Integer articleIdEdit;
+
+    private Date articleEditTime;
 
     private String articleContent;
 
@@ -51,6 +61,38 @@ public class ArticleStation {
 
     public void setArticleOppose(Integer articleOppose) {
         this.articleOppose = articleOppose;
+    }
+
+    public Integer getArticleBrose() {
+        return articleBrose;
+    }
+
+    public void setArticleBrose(Integer articleBrose) {
+        this.articleBrose = articleBrose;
+    }
+
+    public Date getArticlePublishTime() {
+        return articlePublishTime;
+    }
+
+    public void setArticlePublishTime(Date articlePublishTime) {
+        this.articlePublishTime = articlePublishTime;
+    }
+
+    public Integer getArticleIdEdit() {
+        return articleIdEdit;
+    }
+
+    public void setArticleIdEdit(Integer articleIdEdit) {
+        this.articleIdEdit = articleIdEdit;
+    }
+
+    public Date getArticleEditTime() {
+        return articleEditTime;
+    }
+
+    public void setArticleEditTime(Date articleEditTime) {
+        this.articleEditTime = articleEditTime;
     }
 
     public String getArticleContent() {

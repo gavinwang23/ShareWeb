@@ -7,18 +7,23 @@
     <result column="article_admire" jdbcType="INTEGER" property="articleAdmire" />
     <result column="user_name" jdbcType="VARCHAR" property="userName" />
     <result column="article_oppose" jdbcType="INTEGER" property="articleOppose" />
+    <result column="article_brose" jdbcType="INTEGER" property="articleBrose" />
+    <result column="article_publish_time" jdbcType="TIMESTAMP" property="articlePublishTime" />
+    <result column="article_id_edit" jdbcType="INTEGER" property="articleIdEdit" />
+    <result column="article_edit_time" jdbcType="TIMESTAMP" property="articleEditTime" />
   </resultMap>
   <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.share.entity.ArticleStation">
     <result column="article_content" jdbcType="LONGVARCHAR" property="articleContent" />
   </resultMap>
   <sql id="Base_Column_List">
-    id, article_title, article_admire, user_name, article_oppose
+    id, article_title, article_admire, user_name, article_oppose, article_brose, article_publish_time,
+    article_id_edit, article_edit_time
   </sql>
   <sql id="Blob_Column_List">
     article_content
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="ResultMapWithBLOBs">
-    select 
+    select
     <include refid="Base_Column_List" />
     ,
     <include refid="Blob_Column_List" />
@@ -30,12 +35,14 @@
     where id = #{id,jdbcType=BIGINT}
   </delete>
   <insert id="insert" parameterType="com.share.entity.ArticleStation">
-    insert into article_station (id, article_title, article_admire, 
-      user_name, article_oppose, article_content
-      )
-    values (#{id,jdbcType=BIGINT}, #{articleTitle,jdbcType=VARCHAR}, #{articleAdmire,jdbcType=INTEGER}, 
-      #{userName,jdbcType=VARCHAR}, #{articleOppose,jdbcType=INTEGER}, #{articleContent,jdbcType=LONGVARCHAR}
-      )
+    insert into article_station (id, article_title, article_admire,
+      user_name, article_oppose, article_brose,
+      article_publish_time, article_id_edit, article_edit_time,
+      article_content)
+    values (#{id,jdbcType=BIGINT}, #{articleTitle,jdbcType=VARCHAR}, #{articleAdmire,jdbcType=INTEGER},
+      #{userName,jdbcType=VARCHAR}, #{articleOppose,jdbcType=INTEGER}, #{articleBrose,jdbcType=INTEGER},
+      #{articlePublishTime,jdbcType=TIMESTAMP}, #{articleIdEdit,jdbcType=INTEGER}, #{articleEditTime,jdbcType=TIMESTAMP},
+      #{articleContent,jdbcType=LONGVARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.share.entity.ArticleStation">
     insert into article_station
@@ -54,6 +61,18 @@
       </if>
       <if test="articleOppose != null">
         article_oppose,
+      </if>
+      <if test="articleBrose != null">
+        article_brose,
+      </if>
+      <if test="articlePublishTime != null">
+        article_publish_time,
+      </if>
+      <if test="articleIdEdit != null">
+        article_id_edit,
+      </if>
+      <if test="articleEditTime != null">
+        article_edit_time,
       </if>
       <if test="articleContent != null">
         article_content,
@@ -75,6 +94,18 @@
       <if test="articleOppose != null">
         #{articleOppose,jdbcType=INTEGER},
       </if>
+      <if test="articleBrose != null">
+        #{articleBrose,jdbcType=INTEGER},
+      </if>
+      <if test="articlePublishTime != null">
+        #{articlePublishTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="articleIdEdit != null">
+        #{articleIdEdit,jdbcType=INTEGER},
+      </if>
+      <if test="articleEditTime != null">
+        #{articleEditTime,jdbcType=TIMESTAMP},
+      </if>
       <if test="articleContent != null">
         #{articleContent,jdbcType=LONGVARCHAR},
       </if>
@@ -95,6 +126,18 @@
       <if test="articleOppose != null">
         article_oppose = #{articleOppose,jdbcType=INTEGER},
       </if>
+      <if test="articleBrose != null">
+        article_brose = #{articleBrose,jdbcType=INTEGER},
+      </if>
+      <if test="articlePublishTime != null">
+        article_publish_time = #{articlePublishTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="articleIdEdit != null">
+        article_id_edit = #{articleIdEdit,jdbcType=INTEGER},
+      </if>
+      <if test="articleEditTime != null">
+        article_edit_time = #{articleEditTime,jdbcType=TIMESTAMP},
+      </if>
       <if test="articleContent != null">
         article_content = #{articleContent,jdbcType=LONGVARCHAR},
       </if>
@@ -107,6 +150,10 @@
       article_admire = #{articleAdmire,jdbcType=INTEGER},
       user_name = #{userName,jdbcType=VARCHAR},
       article_oppose = #{articleOppose,jdbcType=INTEGER},
+      article_brose = #{articleBrose,jdbcType=INTEGER},
+      article_publish_time = #{articlePublishTime,jdbcType=TIMESTAMP},
+      article_id_edit = #{articleIdEdit,jdbcType=INTEGER},
+      article_edit_time = #{articleEditTime,jdbcType=TIMESTAMP},
       article_content = #{articleContent,jdbcType=LONGVARCHAR}
     where id = #{id,jdbcType=BIGINT}
   </update>
@@ -115,7 +162,11 @@
     set article_title = #{articleTitle,jdbcType=VARCHAR},
       article_admire = #{articleAdmire,jdbcType=INTEGER},
       user_name = #{userName,jdbcType=VARCHAR},
-      article_oppose = #{articleOppose,jdbcType=INTEGER}
+      article_oppose = #{articleOppose,jdbcType=INTEGER},
+      article_brose = #{articleBrose,jdbcType=INTEGER},
+      article_publish_time = #{articlePublishTime,jdbcType=TIMESTAMP},
+      article_id_edit = #{articleIdEdit,jdbcType=INTEGER},
+      article_edit_time = #{articleEditTime,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=BIGINT}
   </update>
 </mapper>
