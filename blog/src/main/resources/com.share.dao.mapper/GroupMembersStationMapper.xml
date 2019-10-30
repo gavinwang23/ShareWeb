@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.share.dao.mapper.GroupMembersStationMapper">
+  <resultMap id="BaseResultMap" type="com.share.entity.GroupMembersStation">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="user_name" jdbcType="VARCHAR" property="userName" />
+    <result column="users_group_id" jdbcType="BIGINT" property="usersGroupId" />
+    <result column="group_admin" jdbcType="BIT" property="groupAdmin" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, user_name, users_group_id, group_admin
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from group_members_station
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from group_members_station
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.share.entity.GroupMembersStation">
+    insert into group_members_station (id, user_name, users_group_id, 
+      group_admin)
+    values (#{id,jdbcType=BIGINT}, #{userName,jdbcType=VARCHAR}, #{usersGroupId,jdbcType=BIGINT}, 
+      #{groupAdmin,jdbcType=BIT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.share.entity.GroupMembersStation">
+    insert into group_members_station
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="userName != null">
+        user_name,
+      </if>
+      <if test="usersGroupId != null">
+        users_group_id,
+      </if>
+      <if test="groupAdmin != null">
+        group_admin,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="userName != null">
+        #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="usersGroupId != null">
+        #{usersGroupId,jdbcType=BIGINT},
+      </if>
+      <if test="groupAdmin != null">
+        #{groupAdmin,jdbcType=BIT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.share.entity.GroupMembersStation">
+    update group_members_station
+    <set>
+      <if test="userName != null">
+        user_name = #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="usersGroupId != null">
+        users_group_id = #{usersGroupId,jdbcType=BIGINT},
+      </if>
+      <if test="groupAdmin != null">
+        group_admin = #{groupAdmin,jdbcType=BIT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.share.entity.GroupMembersStation">
+    update group_members_station
+    set user_name = #{userName,jdbcType=VARCHAR},
+      users_group_id = #{usersGroupId,jdbcType=BIGINT},
+      group_admin = #{groupAdmin,jdbcType=BIT}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

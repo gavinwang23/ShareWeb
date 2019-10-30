@@ -1,7 +1,7 @@
 /*
 Navicat MySQL Data Transfer
 
-Source Server         : localhost
+Source Server         : localhost_3306
 Source Server Version : 80017
 Source Host           : localhost:3306
 Source Database       : share_web
@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 80017
 File Encoding         : 65001
 
-Date: 2019-10-30 18:32:38
+Date: 2019-10-30 19:11:17
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -40,19 +40,35 @@ CREATE TABLE `article_station` (
 INSERT INTO `article_station` VALUES ('1', '123123', '123123', '1', '11111', '1', '1', '2019-10-29 18:01:55', null, null);
 
 -- ----------------------------
+-- Table structure for group_members_station
+-- ----------------------------
+DROP TABLE IF EXISTS `group_members_station`;
+CREATE TABLE `group_members_station` (
+  `id` bigint(32) NOT NULL COMMENT '自增id',
+  `user_name` varchar(32) NOT NULL COMMENT '用户名',
+  `users_group_id` bigint(32) NOT NULL COMMENT '用户所在群id',
+  `group_admin` tinyint(1) NOT NULL DEFAULT '0' COMMENT '是否为群管理员',
+  PRIMARY KEY (`id`),
+  KEY `user_name` (`user_name`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+-- ----------------------------
+-- Records of group_members_station
+-- ----------------------------
+
+-- ----------------------------
 -- Table structure for users_groups_station
 -- ----------------------------
 DROP TABLE IF EXISTS `users_groups_station`;
 CREATE TABLE `users_groups_station` (
   `id` bigint(32) NOT NULL AUTO_INCREMENT COMMENT '自增id',
   `group_name` varchar(32) NOT NULL COMMENT '群名称',
-  `admin_user_name` varchar(255) NOT NULL COMMENT '群管理员用户名',
   `group_create_user_name` varchar(32) NOT NULL COMMENT '群创建者用户名',
-  `group_members_id` bigint(32) NOT NULL COMMENT '群成员',
+  `group_members_station_id` bigint(32) NOT NULL COMMENT '群成员数据库表id',
   `group_file_message_id` bigint(32) DEFAULT NULL COMMENT '群共享文件或消息的id值',
   `group_create_time` datetime NOT NULL COMMENT '群创建时间',
   PRIMARY KEY (`id`),
-  KEY `name_admin` (`group_name`(10),`group_create_user_name`(10),`admin_user_name`(10))
+  KEY `name_group` (`group_name`(10),`group_create_user_name`(10)) USING BTREE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------

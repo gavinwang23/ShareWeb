@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.share.dao.mapper.UsersGroupsStationMapper">
+  <resultMap id="BaseResultMap" type="com.share.entity.UsersGroupsStation">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="group_name" jdbcType="VARCHAR" property="groupName" />
+    <result column="group_create_user_name" jdbcType="VARCHAR" property="groupCreateUserName" />
+    <result column="group_members_station_id" jdbcType="BIGINT" property="groupMembersStationId" />
+    <result column="group_file_message_id" jdbcType="BIGINT" property="groupFileMessageId" />
+    <result column="group_create_time" jdbcType="TIMESTAMP" property="groupCreateTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, group_name, group_create_user_name, group_members_station_id, group_file_message_id, 
+    group_create_time
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from users_groups_station
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from users_groups_station
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.share.entity.UsersGroupsStation">
+    insert into users_groups_station (id, group_name, group_create_user_name, 
+      group_members_station_id, group_file_message_id, 
+      group_create_time)
+    values (#{id,jdbcType=BIGINT}, #{groupName,jdbcType=VARCHAR}, #{groupCreateUserName,jdbcType=VARCHAR}, 
+      #{groupMembersStationId,jdbcType=BIGINT}, #{groupFileMessageId,jdbcType=BIGINT}, 
+      #{groupCreateTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.share.entity.UsersGroupsStation">
+    insert into users_groups_station
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="groupName != null">
+        group_name,
+      </if>
+      <if test="groupCreateUserName != null">
+        group_create_user_name,
+      </if>
+      <if test="groupMembersStationId != null">
+        group_members_station_id,
+      </if>
+      <if test="groupFileMessageId != null">
+        group_file_message_id,
+      </if>
+      <if test="groupCreateTime != null">
+        group_create_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="groupName != null">
+        #{groupName,jdbcType=VARCHAR},
+      </if>
+      <if test="groupCreateUserName != null">
+        #{groupCreateUserName,jdbcType=VARCHAR},
+      </if>
+      <if test="groupMembersStationId != null">
+        #{groupMembersStationId,jdbcType=BIGINT},
+      </if>
+      <if test="groupFileMessageId != null">
+        #{groupFileMessageId,jdbcType=BIGINT},
+      </if>
+      <if test="groupCreateTime != null">
+        #{groupCreateTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.share.entity.UsersGroupsStation">
+    update users_groups_station
+    <set>
+      <if test="groupName != null">
+        group_name = #{groupName,jdbcType=VARCHAR},
+      </if>
+      <if test="groupCreateUserName != null">
+        group_create_user_name = #{groupCreateUserName,jdbcType=VARCHAR},
+      </if>
+      <if test="groupMembersStationId != null">
+        group_members_station_id = #{groupMembersStationId,jdbcType=BIGINT},
+      </if>
+      <if test="groupFileMessageId != null">
+        group_file_message_id = #{groupFileMessageId,jdbcType=BIGINT},
+      </if>
+      <if test="groupCreateTime != null">
+        group_create_time = #{groupCreateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.share.entity.UsersGroupsStation">
+    update users_groups_station
+    set group_name = #{groupName,jdbcType=VARCHAR},
+      group_create_user_name = #{groupCreateUserName,jdbcType=VARCHAR},
+      group_members_station_id = #{groupMembersStationId,jdbcType=BIGINT},
+      group_file_message_id = #{groupFileMessageId,jdbcType=BIGINT},
+      group_create_time = #{groupCreateTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>
