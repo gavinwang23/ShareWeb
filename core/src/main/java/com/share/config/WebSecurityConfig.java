@@ -47,6 +47,9 @@ public class WebSecurityConfig {
         @Autowired
         private AuthenticationLogoutHandler authenticationLogoutHandler;
 
+        @Autowired
+        private LoginVerifyCodeFilter loginVerifyCodeFilter;
+
         @Override
         protected void configure(HttpSecurity http) throws Exception {
             http

@@ -56,8 +56,8 @@ public class UsersStationRest extends BaseController {
     @PostMapping("sign_up")
     public String userSignUp(UsersStation usersStation, @RequestParam String verifyCode) {
         if (StringUtils.isNullOrEmpty(verifyCode)
-                || StringUtils.isNullOrEmpty(redisService.get(request.getLocalAddr()).toString())
-                || !verifyCode.equalsIgnoreCase(redisService.get(request.getLocalAddr()).toString())
+                || StringUtils.isNullOrEmpty((String) redisService.get(request.getLocalAddr()))
+                || !verifyCode.equalsIgnoreCase((String) redisService.get(request.getLocalAddr()))
         )
             throw new RuntimeException(CommonEnum.NO_VERIFY_CODE.getMessage());
 
