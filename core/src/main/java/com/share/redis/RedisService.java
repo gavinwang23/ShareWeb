@@ -15,7 +15,6 @@ import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
-@Service("redisService")
 public class RedisService {
 
     private Logger log = LoggerFactory.getLogger(this.getClass());

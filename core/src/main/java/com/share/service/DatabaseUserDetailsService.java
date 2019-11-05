@@ -1,6 +1,7 @@
 package com.share.service;
 
 import com.share.entity.UsersStation;
+import com.share.redis.RedisService;
 import org.apache.commons.codec.digest.Md5Crypt;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
@@ -20,6 +21,9 @@ public class DatabaseUserDetailsService implements UserDetailsService {
 
     @Autowired
     private UsersStationService usersStationService;
+
+    @Autowired
+    private RedisService redisService;
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {

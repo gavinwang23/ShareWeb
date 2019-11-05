@@ -37,4 +37,10 @@ public class ArticleRest extends BaseController {
 
         return new BaseJsonResponse();
     }
+
+    @PostMapping("/article/image/add")
+    public BaseJsonResponse addImageInArticle() {
+
+        return new BaseJsonResponse();
+    }
 }
