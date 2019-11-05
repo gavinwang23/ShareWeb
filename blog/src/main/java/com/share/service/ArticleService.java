@@ -15,4 +15,7 @@ public class ArticleService {
         return articleStationMapper.selectByPrimaryKey(id);
     }
 
+    public int insertSelective(ArticleStation record) {
+        return articleStationMapper.insertSelective(record);
+    }
 }
