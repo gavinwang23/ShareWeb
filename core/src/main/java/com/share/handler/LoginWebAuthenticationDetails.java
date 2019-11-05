@@ -12,6 +12,16 @@ public class LoginWebAuthenticationDetails extends WebAuthenticationDetails {
     private String username;
     private String password;
 
+    public String getIpAddr() {
+        return ipAddr;
+    }
+
+    public void setIpAddr(String ipAddr) {
+        this.ipAddr = ipAddr;
+    }
+
+    private String ipAddr;
+
     public String getVerifyCode() {
         return verifyCode;
     }
@@ -47,5 +57,6 @@ public class LoginWebAuthenticationDetails extends WebAuthenticationDetails {
         username = request.getParameter("username");
         password = request.getParameter("password");
         verifyCode = request.getParameter("verify_code");
+        ipAddr = request.getRemoteAddr();
     }
 }
