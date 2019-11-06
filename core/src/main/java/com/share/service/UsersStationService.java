@@ -24,9 +24,6 @@ public class UsersStationService {
     @Autowired
     private UsersStationMapper usersStationMapper;
 
-    @Autowired
-    private RedisService redisService;
-
     public UsersStation getUsersStationById(Long id) {
         UsersStation usersStation = null;
         try {
@@ -38,19 +35,19 @@ public class UsersStationService {
         }
     }
 
-    @Transactional
     @Cacheable(value = "users", key = "#username")
     public List<UsersStation> getUsersStationByUsername(String username) {
         List<UsersStation> users = new ArrayList<>();
-        try {
-            users = usersStationMapper.getUsersStationByUsername(username);
-            return users;
-        } catch (Exception e) {
-            e.printStackTrace();
-            return null;
-        }
+        users = getUsersStationByUsernameWithTransaction(username);
+        return users;
     }
 
+    @Transactional
+    public List<UsersStation> getUsersStationByUsernameWithTransaction(String username) {
+        List<UsersStation> users = new ArrayList<>();
+        users = usersStationMapper.getUsersStationByUsername(username);
+        return users;
+    }
 
     public void insertNewUsersStation(UsersStation usersStation) {
         usersStationMapper.insert(usersStation);

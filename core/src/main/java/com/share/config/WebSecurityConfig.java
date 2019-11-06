@@ -79,7 +79,8 @@ public class WebSecurityConfig {
 
         @Override
         protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-            auth.userDetailsService(databaseUserDetailsService).passwordEncoder(getMd5PasswordEncoder());
+//            auth.parentAuthenticationManager(authenticationManagerBean());
+            auth.authenticationProvider(authenticationProviderBean());
         }
 
         @Bean("md5PasswordEncoder")
@@ -104,6 +105,11 @@ public class WebSecurityConfig {
             ProviderManager authenticationProvider = new ProviderManager(Collections.singletonList(new LoginAuthenticationProvider()));
             authenticationProvider.setEraseCredentialsAfterAuthentication(false);
             return authenticationProvider;
+        }
+
+        @Bean
+        public AuthenticationProvider authenticationProviderBean() {
+            return new LoginAuthenticationProvider();
         }
 
     }
