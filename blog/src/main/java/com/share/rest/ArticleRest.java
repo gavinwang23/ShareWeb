@@ -5,8 +5,8 @@ import com.share.entity.ArticleImageRequest;
 import com.share.entity.ArticleStation;
 import com.share.entity.BaseJsonResponse;
 import com.share.service.ArticleService;
-import com.sun.istack.internal.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -42,11 +42,13 @@ public class ArticleRest extends BaseController {
         return new BaseJsonResponse();
     }
 
-    @PostMapping(value = "/article/image/add", consumes = {"multipart/form-data"})
+    @PostMapping(value = "/article/image/add", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public BaseJsonResponse addImageInArticle(
             @RequestPart("files") MultipartFile[] files,
-            @RequestParam("userName") String userName
+            @RequestParam(value = "userName", required = false) String userName,
+            @RequestParam(value = "title", required = false) String title
     ) {
+        MultipartFile file = files[0];
         return new BaseJsonResponse();
     }
 }

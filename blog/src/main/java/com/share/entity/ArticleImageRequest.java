@@ -1,14 +1,12 @@
 package com.share.entity;
 
+import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.multipart.MultipartFile;
 
 public class ArticleImageRequest {
     private String userName;
     private String title;
-    private MultipartFile files;
-
-    public ArticleImageRequest() {
-    }
+    private MultipartFile[] files;
 
     public String getUserName() {
         return userName;
@@ -26,11 +24,11 @@ public class ArticleImageRequest {
         this.title = title;
     }
 
-    public MultipartFile getFiles() {
+    public MultipartFile[] getFiles() {
         return files;
     }
 
-    public void setFiles(MultipartFile files) {
+    public void setFiles(MultipartFile[] files) {
         this.files = files;
     }
 }

@@ -17,6 +17,7 @@
     <import resource="classpath*:/spring/*.xml"/>
     <mvc:annotation-driven></mvc:annotation-driven>
 
+    <bean id="multipartResolver" class="org.springframework.web.multipart.support.StandardServletMultipartResolver"/>
     <bean class="com.share.config.WebSecurityConfig"/>
     <!-- 设置返回json的编码格式 -->
     <bean id="stringConverter" class="org.springframework.http.converter.StringHttpMessageConverter">
