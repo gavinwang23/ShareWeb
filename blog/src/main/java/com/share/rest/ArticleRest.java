@@ -1,12 +1,16 @@
 package com.share.rest;
 
 import com.mysql.cj.util.StringUtils;
+import com.share.entity.ArticleImageRequest;
 import com.share.entity.ArticleStation;
 import com.share.entity.BaseJsonResponse;
 import com.share.service.ArticleService;
+import com.sun.istack.internal.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.annotation.MultipartConfig;
 import java.util.Date;
 
 @RestController
@@ -38,9 +42,11 @@ public class ArticleRest extends BaseController {
         return new BaseJsonResponse();
     }
 
-    @PostMapping("/article/image/add")
-    public BaseJsonResponse addImageInArticle() {
-
+    @PostMapping(value = "/article/image/add", consumes = {"multipart/form-data"})
+    public BaseJsonResponse addImageInArticle(
+            @RequestPart("files") MultipartFile[] files,
+            @RequestParam("userName") String userName
+    ) {
         return new BaseJsonResponse();
     }
 }
