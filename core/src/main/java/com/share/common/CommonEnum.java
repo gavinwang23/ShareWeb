@@ -7,7 +7,9 @@ public enum CommonEnum {
 
 
     //一些常用警告
-    NO_VERIFY_CODE(-1, "Please input correct verify-code.")
+    NO_VERIFY_CODE(-1, "Please input correct verify-code."),
+    NO_CORRECT_INPUT(-1, "Please input the correct parameter."),
+    SERVER_INTERNAL_ERROR(-1, "Server internal error, please contact our engineer.")
     ;
 
     CommonEnum(Integer code, String message) {
