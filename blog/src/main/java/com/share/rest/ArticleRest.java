@@ -68,7 +68,7 @@ public class ArticleRest extends BaseController {
                 throw new RuntimeException(CommonEnum.NO_CORRECT_IMAGE_SUFFIX.getMessage());
 
             String[] suffix = imageSuffix.split(".");
-            String path = filePath + "/" + userName + "/" + title + "/" + i + "." + imageSuffix;
+            String path = filePath + "/" + userName + "/" + title + "/" + i + "." + suffix[suffix.length - 1];
             list.add(path);
             File f = new File(path);
             if (StringUtils.isNullOrEmpty(f.getParent()))
