@@ -67,12 +67,13 @@ public class ArticleRest extends BaseController {
                     && !imageSuffix.endsWith("swf")&& !imageSuffix.endsWith("svg") && !imageSuffix.endsWith("cdr"))
                 throw new RuntimeException(CommonEnum.NO_CORRECT_IMAGE_SUFFIX.getMessage());
 
-            String[] suffix = imageSuffix.split(".");
+            String[] suffix = imageSuffix.split("\\.");
             String path = filePath + "/" + userName + "/" + title + "/" + i + "." + suffix[suffix.length - 1];
-            list.add(path);
+            list.add(request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort()
+                    + "/static" + "/" + userName + "/" + title + "/" + i + "." + suffix[suffix.length - 1]);
             File f = new File(path);
-            if (StringUtils.isNullOrEmpty(f.getParent()))
-                f.mkdirs();
+            if (f.getParentFile() != null && !f.getParentFile().exists())
+                f.getParentFile().mkdirs();
 
             f.createNewFile();
             InputStream is = file.getInputStream();
