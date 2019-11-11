@@ -2,7 +2,7 @@ package com.share.rest;
 
 import com.mysql.cj.util.StringUtils;
 import com.share.common.CommonEnum;
-import com.share.entity.ArticleStation;
+import com.share.entity.dao.ArticleStation;
 import com.share.entity.BaseJsonResponse;
 import com.share.service.ArticleService;
 import org.springframework.beans.factory.annotation.Autowired;

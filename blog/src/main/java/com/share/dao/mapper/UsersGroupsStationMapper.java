@@ -1,6 +1,6 @@
 package com.share.dao.mapper;
 
-import com.share.entity.UsersGroupsStation;
+import com.share.entity.dao.UsersGroupsStation;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Component;
 

@@ -1,4 +1,4 @@
-package com.share.entity;
+package com.share.entity.dao;
 
 import java.util.Date;
 
