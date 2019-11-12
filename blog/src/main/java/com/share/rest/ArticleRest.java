@@ -59,8 +59,8 @@ public class ArticleRest extends BaseController {
             throw new RuntimeException(CommonEnum.NO_CORRECT_INPUT.getMessage());
 
         List<String> list = new ArrayList<>();
+        int i = 1;
         for (MultipartFile file : files) {
-            int i = 1;
             String imageSuffix = file.getOriginalFilename();
             if (!imageSuffix.contains(".") && !imageSuffix.endsWith("bmp") && !imageSuffix.endsWith("gif")
                     && !imageSuffix.endsWith("jpeg") && !imageSuffix.endsWith("png") && !imageSuffix.endsWith("psd")
