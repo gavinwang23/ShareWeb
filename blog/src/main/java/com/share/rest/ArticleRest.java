@@ -39,8 +39,8 @@ public class ArticleRest extends BaseController {
     @PostMapping("article/add")
     public BaseJsonResponse addArticle(ArticleStation article) {
         if (article == null || StringUtils.isNullOrEmpty(article.getArticleTitle())
-                || StringUtils.isNullOrEmpty(article.getUserName()))
-            throw new RuntimeException("Can't input empty content.");
+                || StringUtils.isNullOrEmpty(article.getUserName()) || StringUtils.isNullOrEmpty(article.getArticleContent()))
+            throw new RuntimeException(CommonEnum.NO_CONTENT_INPUT.getMessage());
 
         if (article.getArticlePublishTime() == null)
             article.setArticlePublishTime(new Date());
