@@ -55,8 +55,8 @@ public class ArticleRest extends BaseController {
     @PostMapping(value = "/article/image/add", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public ImageInsertResponse addImageInArticle(
             @RequestParam("files") MultipartFile[] files,
-            @RequestParam(value = "userName", required = false) String userName,
-            @RequestParam(value = "title", required = false) String title
+            @RequestParam(value = "userName") String userName,
+            @RequestParam(value = "title") String title
     ) throws IOException {
         if (files == null || files.length == 0 || StringUtils.isNullOrEmpty(userName) || StringUtils.isNullOrEmpty(title))
             throw new RuntimeException(CommonEnum.NO_CORRECT_INPUT.getMessage());
@@ -101,7 +101,7 @@ public class ArticleRest extends BaseController {
     @PostMapping(value = "/headPortrait/userName/add", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public ImageInsertResponse addHeadPortrait(
             @RequestParam("files") MultipartFile[] files,
-            @RequestParam(value = "userName", required = false) String userName
+            @RequestParam(value = "userName") String userName
     )throws IOException {
         return this.addImageInArticle(files,userName,"HeadPortrait" + headPortrait);
     }
