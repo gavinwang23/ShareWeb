@@ -98,7 +98,7 @@ public class ArticleRest extends BaseController {
         return response;
     }
 
-    @PostMapping(value = "/headPortrait/userName/add", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    @PostMapping(value = "/head_portrait/add", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public ImageInsertResponse addHeadPortrait(
             @RequestParam("files") MultipartFile[] files,
             @RequestParam(value = "userName") String userName
