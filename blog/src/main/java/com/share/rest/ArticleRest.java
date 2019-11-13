@@ -25,6 +25,9 @@ public class ArticleRest extends BaseController {
     @Value("${system.static.files.path}")
     private String filePath;
 
+    @Value("${system.static.files.headPortrait}")
+    private String headPortrait;
+
     @Autowired
     private ArticleService articleService;
 
@@ -94,4 +97,13 @@ public class ArticleRest extends BaseController {
         response.setList(list);
         return response;
     }
+
+    @PostMapping(value = "/userName/headPortrait/add", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    public ImageInsertResponse addHeadPortrait(
+            @RequestParam("files") MultipartFile[] files,
+            @RequestParam(value = "userName", required = false) String userName
+    )throws IOException {
+        return this.addImageInArticle(files,userName,"HeadPortrait" + headPortrait);
+    }
+
 }
