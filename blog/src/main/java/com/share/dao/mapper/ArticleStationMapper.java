@@ -1,9 +1,8 @@
 package com.share.dao.mapper;
 
+import com.share.entity.dao.ArticleStation;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Component;
-
-import com.share.entity.dao.ArticleStation;
 
 @Mapper
 @Component

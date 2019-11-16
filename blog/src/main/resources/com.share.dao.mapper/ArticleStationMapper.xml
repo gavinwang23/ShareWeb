@@ -11,19 +11,22 @@
     <result column="article_publish_time" jdbcType="TIMESTAMP" property="articlePublishTime" />
     <result column="article_id_edit" jdbcType="INTEGER" property="articleIdEdit" />
     <result column="article_edit_time" jdbcType="TIMESTAMP" property="articleEditTime" />
+    <result column="can_be_reprint" jdbcType="BIT" property="canBeReprint" />
+    <result column="reprint_user_name" jdbcType="VARCHAR" property="reprintUserName" />
+    <result column="reprint_link" jdbcType="VARCHAR" property="reprintLink" />
   </resultMap>
   <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.share.entity.dao.ArticleStation">
     <result column="article_content" jdbcType="LONGVARCHAR" property="articleContent" />
   </resultMap>
   <sql id="Base_Column_List">
-    id, article_title, article_admire, user_name, article_oppose, article_brose, article_publish_time,
-    article_id_edit, article_edit_time
+    id, article_title, article_admire, user_name, article_oppose, article_brose, article_publish_time, 
+    article_id_edit, article_edit_time, can_be_reprint, reprint_user_name, reprint_link
   </sql>
   <sql id="Blob_Column_List">
     article_content
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="ResultMapWithBLOBs">
-    select
+    select 
     <include refid="Base_Column_List" />
     ,
     <include refid="Blob_Column_List" />
@@ -35,13 +38,15 @@
     where id = #{id,jdbcType=BIGINT}
   </delete>
   <insert id="insert" parameterType="com.share.entity.dao.ArticleStation">
-    insert into article_station (id, article_title, article_admire,
-      user_name, article_oppose, article_brose,
-      article_publish_time, article_id_edit, article_edit_time,
+    insert into article_station (id, article_title, article_admire, 
+      user_name, article_oppose, article_brose, 
+      article_publish_time, article_id_edit, article_edit_time, 
+      can_be_reprint, reprint_user_name, reprint_link, 
       article_content)
-    values (#{id,jdbcType=BIGINT}, #{articleTitle,jdbcType=VARCHAR}, #{articleAdmire,jdbcType=INTEGER},
-      #{userName,jdbcType=VARCHAR}, #{articleOppose,jdbcType=INTEGER}, #{articleBrose,jdbcType=INTEGER},
-      #{articlePublishTime,jdbcType=TIMESTAMP}, #{articleIdEdit,jdbcType=INTEGER}, #{articleEditTime,jdbcType=TIMESTAMP},
+    values (#{id,jdbcType=BIGINT}, #{articleTitle,jdbcType=VARCHAR}, #{articleAdmire,jdbcType=INTEGER}, 
+      #{userName,jdbcType=VARCHAR}, #{articleOppose,jdbcType=INTEGER}, #{articleBrose,jdbcType=INTEGER}, 
+      #{articlePublishTime,jdbcType=TIMESTAMP}, #{articleIdEdit,jdbcType=INTEGER}, #{articleEditTime,jdbcType=TIMESTAMP}, 
+      #{canBeReprint,jdbcType=BIT}, #{reprintUserName,jdbcType=VARCHAR}, #{reprintLink,jdbcType=VARCHAR}, 
       #{articleContent,jdbcType=LONGVARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.share.entity.dao.ArticleStation">
@@ -73,6 +78,15 @@
       </if>
       <if test="articleEditTime != null">
         article_edit_time,
+      </if>
+      <if test="canBeReprint != null">
+        can_be_reprint,
+      </if>
+      <if test="reprintUserName != null">
+        reprint_user_name,
+      </if>
+      <if test="reprintLink != null">
+        reprint_link,
       </if>
       <if test="articleContent != null">
         article_content,
@@ -106,6 +120,15 @@
       <if test="articleEditTime != null">
         #{articleEditTime,jdbcType=TIMESTAMP},
       </if>
+      <if test="canBeReprint != null">
+        #{canBeReprint,jdbcType=BIT},
+      </if>
+      <if test="reprintUserName != null">
+        #{reprintUserName,jdbcType=VARCHAR},
+      </if>
+      <if test="reprintLink != null">
+        #{reprintLink,jdbcType=VARCHAR},
+      </if>
       <if test="articleContent != null">
         #{articleContent,jdbcType=LONGVARCHAR},
       </if>
@@ -138,6 +161,15 @@
       <if test="articleEditTime != null">
         article_edit_time = #{articleEditTime,jdbcType=TIMESTAMP},
       </if>
+      <if test="canBeReprint != null">
+        can_be_reprint = #{canBeReprint,jdbcType=BIT},
+      </if>
+      <if test="reprintUserName != null">
+        reprint_user_name = #{reprintUserName,jdbcType=VARCHAR},
+      </if>
+      <if test="reprintLink != null">
+        reprint_link = #{reprintLink,jdbcType=VARCHAR},
+      </if>
       <if test="articleContent != null">
         article_content = #{articleContent,jdbcType=LONGVARCHAR},
       </if>
@@ -154,6 +186,9 @@
       article_publish_time = #{articlePublishTime,jdbcType=TIMESTAMP},
       article_id_edit = #{articleIdEdit,jdbcType=INTEGER},
       article_edit_time = #{articleEditTime,jdbcType=TIMESTAMP},
+      can_be_reprint = #{canBeReprint,jdbcType=BIT},
+      reprint_user_name = #{reprintUserName,jdbcType=VARCHAR},
+      reprint_link = #{reprintLink,jdbcType=VARCHAR},
       article_content = #{articleContent,jdbcType=LONGVARCHAR}
     where id = #{id,jdbcType=BIGINT}
   </update>
@@ -166,7 +201,10 @@
       article_brose = #{articleBrose,jdbcType=INTEGER},
       article_publish_time = #{articlePublishTime,jdbcType=TIMESTAMP},
       article_id_edit = #{articleIdEdit,jdbcType=INTEGER},
-      article_edit_time = #{articleEditTime,jdbcType=TIMESTAMP}
+      article_edit_time = #{articleEditTime,jdbcType=TIMESTAMP},
+      can_be_reprint = #{canBeReprint,jdbcType=BIT},
+      reprint_user_name = #{reprintUserName,jdbcType=VARCHAR},
+      reprint_link = #{reprintLink,jdbcType=VARCHAR}
     where id = #{id,jdbcType=BIGINT}
   </update>
 </mapper>

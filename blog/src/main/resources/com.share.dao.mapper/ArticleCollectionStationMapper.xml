@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.share.dao.mapper.ArticleCollectionStationMapper">
+  <resultMap id="BaseResultMap" type="com.share.entity.dao.ArticleCollectionStation">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="user_name" jdbcType="VARCHAR" property="userName" />
+    <result column="user_id" jdbcType="BIGINT" property="userId" />
+    <result column="collection_name" jdbcType="VARCHAR" property="collectionName" />
+    <result column="article_name" jdbcType="VARCHAR" property="articleName" />
+    <result column="article_id" jdbcType="BIGINT" property="articleId" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="collection_type" jdbcType="CHAR" property="collectionType" />
+    <result column="public_or_not" jdbcType="BIT" property="publicOrNot" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.share.entity.dao.ArticleCollectionStation">
+    <result column="description" jdbcType="LONGVARCHAR" property="description" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, user_name, user_id, collection_name, article_name, article_id, create_time, update_time, 
+    collection_type, public_or_not
+  </sql>
+  <sql id="Blob_Column_List">
+    description
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from article_collection_station
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from article_collection_station
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.share.entity.dao.ArticleCollectionStation">
+    insert into article_collection_station (id, user_name, user_id, 
+      collection_name, article_name, article_id, 
+      create_time, update_time, collection_type, 
+      public_or_not, description)
+    values (#{id,jdbcType=BIGINT}, #{userName,jdbcType=VARCHAR}, #{userId,jdbcType=BIGINT}, 
+      #{collectionName,jdbcType=VARCHAR}, #{articleName,jdbcType=VARCHAR}, #{articleId,jdbcType=BIGINT}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, #{collectionType,jdbcType=CHAR}, 
+      #{publicOrNot,jdbcType=BIT}, #{description,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.share.entity.dao.ArticleCollectionStation">
+    insert into article_collection_station
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="userName != null">
+        user_name,
+      </if>
+      <if test="userId != null">
+        user_id,
+      </if>
+      <if test="collectionName != null">
+        collection_name,
+      </if>
+      <if test="articleName != null">
+        article_name,
+      </if>
+      <if test="articleId != null">
+        article_id,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+      <if test="collectionType != null">
+        collection_type,
+      </if>
+      <if test="publicOrNot != null">
+        public_or_not,
+      </if>
+      <if test="description != null">
+        description,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="userName != null">
+        #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null">
+        #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="collectionName != null">
+        #{collectionName,jdbcType=VARCHAR},
+      </if>
+      <if test="articleName != null">
+        #{articleName,jdbcType=VARCHAR},
+      </if>
+      <if test="articleId != null">
+        #{articleId,jdbcType=BIGINT},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="collectionType != null">
+        #{collectionType,jdbcType=CHAR},
+      </if>
+      <if test="publicOrNot != null">
+        #{publicOrNot,jdbcType=BIT},
+      </if>
+      <if test="description != null">
+        #{description,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.share.entity.dao.ArticleCollectionStation">
+    update article_collection_station
+    <set>
+      <if test="userName != null">
+        user_name = #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null">
+        user_id = #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="collectionName != null">
+        collection_name = #{collectionName,jdbcType=VARCHAR},
+      </if>
+      <if test="articleName != null">
+        article_name = #{articleName,jdbcType=VARCHAR},
+      </if>
+      <if test="articleId != null">
+        article_id = #{articleId,jdbcType=BIGINT},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="collectionType != null">
+        collection_type = #{collectionType,jdbcType=CHAR},
+      </if>
+      <if test="publicOrNot != null">
+        public_or_not = #{publicOrNot,jdbcType=BIT},
+      </if>
+      <if test="description != null">
+        description = #{description,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.share.entity.dao.ArticleCollectionStation">
+    update article_collection_station
+    set user_name = #{userName,jdbcType=VARCHAR},
+      user_id = #{userId,jdbcType=BIGINT},
+      collection_name = #{collectionName,jdbcType=VARCHAR},
+      article_name = #{articleName,jdbcType=VARCHAR},
+      article_id = #{articleId,jdbcType=BIGINT},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      collection_type = #{collectionType,jdbcType=CHAR},
+      public_or_not = #{publicOrNot,jdbcType=BIT},
+      description = #{description,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.share.entity.dao.ArticleCollectionStation">
+    update article_collection_station
+    set user_name = #{userName,jdbcType=VARCHAR},
+      user_id = #{userId,jdbcType=BIGINT},
+      collection_name = #{collectionName,jdbcType=VARCHAR},
+      article_name = #{articleName,jdbcType=VARCHAR},
+      article_id = #{articleId,jdbcType=BIGINT},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      collection_type = #{collectionType,jdbcType=CHAR},
+      public_or_not = #{publicOrNot,jdbcType=BIT}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

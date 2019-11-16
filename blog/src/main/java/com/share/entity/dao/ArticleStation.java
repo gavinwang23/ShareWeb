@@ -21,6 +21,12 @@ public class ArticleStation {
 
     private Date articleEditTime;
 
+    private Boolean canBeReprint;
+
+    private String reprintUserName;
+
+    private String reprintLink;
+
     private String articleContent;
 
     public Long getId() {
@@ -93,6 +99,30 @@ public class ArticleStation {
 
     public void setArticleEditTime(Date articleEditTime) {
         this.articleEditTime = articleEditTime;
+    }
+
+    public Boolean getCanBeReprint() {
+        return canBeReprint;
+    }
+
+    public void setCanBeReprint(Boolean canBeReprint) {
+        this.canBeReprint = canBeReprint;
+    }
+
+    public String getReprintUserName() {
+        return reprintUserName;
+    }
+
+    public void setReprintUserName(String reprintUserName) {
+        this.reprintUserName = reprintUserName == null ? null : reprintUserName.trim();
+    }
+
+    public String getReprintLink() {
+        return reprintLink;
+    }
+
+    public void setReprintLink(String reprintLink) {
+        this.reprintLink = reprintLink == null ? null : reprintLink.trim();
     }
 
     public String getArticleContent() {
