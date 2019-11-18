@@ -11,7 +11,7 @@
  Target Server Version : 80017
  File Encoding         : 65001
 
- Date: 16/11/2019 20:06:06
+ Date: 18/11/2019 15:10:10
 */
 
 SET NAMES utf8mb4;
@@ -26,15 +26,16 @@ CREATE TABLE `article_collection_station`  (
   `user_name` varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '用户名',
   `user_id` bigint(32) NOT NULL COMMENT '用户id',
   `collection_name` varchar(64) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '文集名称',
-  `article_name` varchar(64) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '文章名称',
-  `article_id` bigint(32) NOT NULL COMMENT '文章id',
+  `article_name` varchar(64) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '文章名称',
+  `article_id` bigint(32) NULL DEFAULT NULL COMMENT '文章id',
   `create_time` datetime(0) NOT NULL COMMENT '创建时间',
   `update_time` datetime(0) NULL DEFAULT NULL COMMENT '修改更新时间',
   `description` text CHARACTER SET utf8 COLLATE utf8_general_ci NULL COMMENT '文集简要说明',
   `collection_type` enum('DIARY','BLOG','THESIS') CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '文集类型',
   `public_or_not` tinyint(1) NOT NULL DEFAULT 1 COMMENT '是否公开',
-  PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+  PRIMARY KEY (`id`) USING BTREE,
+  INDEX `user_id_article_id`(`user_id`, `article_id`, `user_name`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Table structure for article_station
@@ -53,7 +54,7 @@ CREATE TABLE `article_station`  (
   `article_edit_time` datetime(0) NULL DEFAULT NULL COMMENT '记录编辑时间',
   `can_be_reprint` tinyint(1) NOT NULL DEFAULT 1 COMMENT '能否被转载',
   `reprint_user_name` varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '转载出处的用户名',
-  `reprint_link` varchar(64) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '转载出版的网址',
+  `reprint_link` varchar(64) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '转载出处的网址',
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `user_name_title_time`(`user_name`(10), `article_title`(10), `article_publish_time`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
@@ -76,7 +77,7 @@ CREATE TABLE `fans_station`  (
   `create_time` datetime(0) NOT NULL COMMENT '关注时间',
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `user_id`(`followed_user_id`, `fans_user_id`, `create_time`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Table structure for group_members_station
@@ -104,7 +105,7 @@ CREATE TABLE `users_groups_station`  (
   `group_create_time` datetime(0) NOT NULL COMMENT '群创建时间',
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `name_group`(`group_name`(10), `group_create_user_name`(10)) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Table structure for users_station
