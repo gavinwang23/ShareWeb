@@ -2,6 +2,7 @@ package com.share.rest;
 
 import com.mysql.cj.util.StringUtils;
 import com.share.common.CommonEnum;
+import com.share.entity.dao.ArticleCollectionStation;
 import com.share.entity.dao.ArticleStation;
 import com.share.entity.BaseJsonResponse;
 import com.share.entity.response.ImageInsertResponse;
@@ -104,6 +105,20 @@ public class ArticleRest extends BaseController {
             @RequestParam(value = "userName") String userName
     )throws IOException {
         return this.addImageInArticle(files,userName,"HeadPortrait" + headPortrait);
+    }
+
+    @PostMapping(value = "/corpus/add")
+    public BaseJsonResponse addCorpus(ArticleCollectionStation corpus){
+        if (corpus == null || StringUtils.isNullOrEmpty(corpus.getCollectionName()))
+            throw new RuntimeException(CommonEnum.NO_CONTENT_INPUT.getMessage());
+        if(corpus.getCreateTime() == null)
+            corpus.setCreateTime(new Date());
+
+        Integer result = articleService.insertSelective(corpus);
+        if (result != 0)
+            throw new RuntimeException(CommonEnum.SERVER_INTERNAL_ERROR.getMessage());
+
+        return new BaseJsonResponse();
     }
 
 }
