@@ -16,7 +16,6 @@ public class ArticleService {
     @Autowired
     private ArticleCollectionStationMapper articleCollectionStationMapper;
 
-
     public ArticleStation selectByPrimaryKey(Long id) {
         return articleStationMapper.selectByPrimaryKey(id);
     }
@@ -24,7 +23,6 @@ public class ArticleService {
     public int insertSelective(ArticleStation record) {
         return articleStationMapper.insertSelective(record);
     }
-
 
     public int insertSelective(ArticleCollectionStation record){
         return articleCollectionStationMapper.insertSelective(record);
