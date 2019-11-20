@@ -48,7 +48,7 @@
         </javaClientGenerator>
 
         <!-- 指定数据表 -->
-        <table schema="" tableName="article_station"
+        <table schema="" tableName="fans_station"
                enableCountByExample="false"
                enableUpdateByExample="false"
                enableDeleteByExample="false"

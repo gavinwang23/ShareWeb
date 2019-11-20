@@ -7,6 +7,8 @@ import com.share.entity.dao.ArticleStation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class ArticleService {
 
@@ -26,5 +28,13 @@ public class ArticleService {
 
     public int insertSelective(ArticleCollectionStation record){
         return articleCollectionStationMapper.insertSelective(record);
+    }
+
+    public Integer insertCorpusWithArticles(ArticleCollectionStation corpus, List<ArticleStation> articles) {
+        return articleCollectionStationMapper.insertCorpusWithArticles(corpus, articles);
+    }
+
+    public Integer deleteCorpusWithNoArticle(ArticleCollectionStation corpus) {
+        return articleCollectionStationMapper.deleteCorpusWithNoArticle(corpus);
     }
 }

@@ -56,8 +56,8 @@ public class ArticleRest extends BaseController {
     @PostMapping(value = "/article/image/add", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public ImageInsertResponse addImageInArticle(
             @RequestParam("files") MultipartFile[] files,
-            @RequestParam(value = "userName") String userName,
-            @RequestParam(value = "title") String title
+            @RequestParam("userName") String userName,
+            @RequestParam("title") String title
     ) throws IOException {
         if (files == null || files.length == 0 || StringUtils.isNullOrEmpty(userName) || StringUtils.isNullOrEmpty(title))
             throw new RuntimeException(CommonEnum.NO_CORRECT_INPUT.getMessage());
@@ -68,7 +68,7 @@ public class ArticleRest extends BaseController {
             String imageSuffix = file.getOriginalFilename();
             if (!imageSuffix.contains(".") && !imageSuffix.endsWith("bmp") && !imageSuffix.endsWith("gif")
                     && !imageSuffix.endsWith("jpeg") && !imageSuffix.endsWith("png") && !imageSuffix.endsWith("psd")
-                    && !imageSuffix.endsWith("swf")&& !imageSuffix.endsWith("svg") && !imageSuffix.endsWith("cdr"))
+                    && !imageSuffix.endsWith("swf") && !imageSuffix.endsWith("svg") && !imageSuffix.endsWith("cdr"))
                 throw new RuntimeException(CommonEnum.NO_CORRECT_IMAGE_SUFFIX.getMessage());
 
             String[] suffix = imageSuffix.split("\\.");
@@ -102,19 +102,27 @@ public class ArticleRest extends BaseController {
     @PostMapping(value = "/head_portrait/add", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public ImageInsertResponse addHeadPortrait(
             @RequestParam("files") MultipartFile[] files,
-            @RequestParam(value = "userName") String userName
-    )throws IOException {
-        return this.addImageInArticle(files,userName,"HeadPortrait" + headPortrait);
+            @RequestParam("userName") String userName
+    ) throws IOException {
+        return this.addImageInArticle(files, userName, "HeadPortrait" + headPortrait);
     }
 
     @PostMapping(value = "/corpus/add")
-    public BaseJsonResponse addCorpus(ArticleCollectionStation corpus){
+    public BaseJsonResponse addCorpus(@RequestParam("corpus") ArticleCollectionStation corpus,
+                                      @RequestParam(value = "articles", required = false) List<ArticleStation> articles) {
         if (corpus == null || StringUtils.isNullOrEmpty(corpus.getCollectionName()))
             throw new RuntimeException(CommonEnum.NO_CONTENT_INPUT.getMessage());
-        if(corpus.getCreateTime() == null)
+        if (corpus.getCreateTime() == null)
             corpus.setCreateTime(new Date());
 
-        Integer result = articleService.insertSelective(corpus);
+        if (articles == null || articles.size() == 0) {
+            Integer result = articleService.insertSelective(corpus);
+            if (result != 0)
+                throw new RuntimeException(CommonEnum.SERVER_INTERNAL_ERROR.getMessage());
+        }
+
+        articleService.deleteCorpusWithNoArticle(corpus);
+        Integer result = articleService.insertCorpusWithArticles(corpus, articles);
         if (result != 0)
             throw new RuntimeException(CommonEnum.SERVER_INTERNAL_ERROR.getMessage());
 

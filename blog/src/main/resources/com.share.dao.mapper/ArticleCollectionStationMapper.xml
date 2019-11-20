@@ -35,6 +35,13 @@
     delete from article_collection_station
     where id = #{id,jdbcType=BIGINT}
   </delete>
+
+  <delete id="deleteCorpusWithNoArticle">
+    delete from article_collection_station
+    where id = #{corpus.id,jdbcType=BIGINT} and user_name = #{corpus.userName,jdbcType=VARCHAR} and article_id is NULL
+      and article_name is NULL
+  </delete>
+
   <insert id="insert" parameterType="com.share.entity.dao.ArticleCollectionStation">
     insert into article_collection_station (id, user_name, user_id, 
       collection_name, article_name, article_id, 
@@ -45,6 +52,22 @@
       #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, #{collectionType,jdbcType=CHAR}, 
       #{publicOrNot,jdbcType=BIT}, #{description,jdbcType=LONGVARCHAR})
   </insert>
+
+
+  <insert id="insertCorpusWithArticles">
+    insert into article_collection_station (id, user_name, user_id,
+      collection_name, article_name, article_id,
+      create_time, update_time, collection_type,
+      public_or_not, description)
+    values <foreach collection="articles" item="item" index="index" separator=",">
+      (#{corpus.id,jdbcType=BIGINT}, #{corpus.userName,jdbcType=VARCHAR}, #{corpus.userId,jdbcType=BIGINT},
+      #{corpus.collectionName,jdbcType=VARCHAR}, #{item.articleName,jdbcType=VARCHAR}, #{item.articleId,jdbcType=BIGINT},
+      #{corpus.createTime,jdbcType=TIMESTAMP}, #{corpus.updateTime,jdbcType=TIMESTAMP}, #{corpus.collectionType,jdbcType=CHAR},
+      #{corpus.publicOrNot,jdbcType=BIT}, #{corpus.description,jdbcType=LONGVARCHAR})
+    </foreach>>
+  </insert>
+
+
   <insert id="insertSelective" parameterType="com.share.entity.dao.ArticleCollectionStation">
     insert into article_collection_station
     <trim prefix="(" suffix=")" suffixOverrides=",">
@@ -118,6 +141,7 @@
       </if>
     </trim>
   </insert>
+
   <update id="updateByPrimaryKeySelective" parameterType="com.share.entity.dao.ArticleCollectionStation">
     update article_collection_station
     <set>
