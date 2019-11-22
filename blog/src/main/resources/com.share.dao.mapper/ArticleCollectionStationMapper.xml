@@ -55,12 +55,12 @@
 
 
   <insert id="insertCorpusWithArticles">
-    insert into article_collection_station (id, user_name, user_id,
+    insert into article_collection_station (user_name, user_id,
       collection_name, article_name, article_id,
       create_time, update_time, collection_type,
       public_or_not, description)
     values <foreach collection="articles" item="item" index="index" separator=",">
-      (#{corpus.id,jdbcType=BIGINT}, #{corpus.userName,jdbcType=VARCHAR}, #{corpus.userId,jdbcType=BIGINT},
+      (#{corpus.userName,jdbcType=VARCHAR}, #{corpus.userId,jdbcType=BIGINT},
       #{corpus.collectionName,jdbcType=VARCHAR}, #{item.articleName,jdbcType=VARCHAR}, #{item.articleId,jdbcType=BIGINT},
       #{corpus.createTime,jdbcType=TIMESTAMP}, #{corpus.updateTime,jdbcType=TIMESTAMP}, #{corpus.collectionType,jdbcType=CHAR},
       #{corpus.publicOrNot,jdbcType=BIT}, #{corpus.description,jdbcType=LONGVARCHAR})
