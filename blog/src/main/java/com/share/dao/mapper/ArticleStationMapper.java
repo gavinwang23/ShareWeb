@@ -2,7 +2,10 @@ package com.share.dao.mapper;
 
 import com.share.entity.dao.ArticleStation;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Component;
+
+import java.util.List;
 
 @Mapper
 @Component
@@ -20,4 +23,6 @@ public interface ArticleStationMapper {
     int updateByPrimaryKeyWithBLOBs(ArticleStation record);
 
     int updateByPrimaryKey(ArticleStation record);
+
+    List<ArticleStation> getArticleListByUserName(@Param("userName") String userName);
 }

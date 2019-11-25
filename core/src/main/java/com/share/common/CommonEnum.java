@@ -11,7 +11,8 @@ public enum CommonEnum {
     NO_CORRECT_INPUT(-1, "Please input the correct parameter."),
     NO_CORRECT_IMAGE_SUFFIX(-1, "Please input correct pattern of image."),
     NO_CONTENT_INPUT(-1, "Can't input empty content."),
-    SERVER_INTERNAL_ERROR(-1, "Server internal error, please contact our engineer.")
+    SERVER_INTERNAL_ERROR(-1, "Server internal error, please contact our engineer."),
+    NO_USER_NAME_INPUT(-1, "Please input your username."),
     ;
 
     CommonEnum(Integer code, String message) {

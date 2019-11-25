@@ -37,4 +37,8 @@ public class ArticleService {
     public Integer deleteCorpusWithNoArticle(ArticleCollectionStation corpus) {
         return articleCollectionStationMapper.deleteCorpusWithNoArticle(corpus);
     }
+
+    public List<ArticleStation> getArticleListByUserName(String userName) {
+        return articleStationMapper.getArticleListByUserName(userName);
+    }
 }

@@ -5,6 +5,7 @@ import com.share.common.CommonEnum;
 import com.share.entity.dao.ArticleCollectionStation;
 import com.share.entity.dao.ArticleStation;
 import com.share.entity.BaseJsonResponse;
+import com.share.entity.response.ArticleListResponse;
 import com.share.entity.response.ImageInsertResponse;
 import com.share.service.ArticleService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -98,6 +99,19 @@ public class ArticleRest extends BaseController {
         response.setList(list);
         return response;
     }
+
+    @GetMapping(value = "/artciles/get")
+    public ArticleListResponse getArticles(@RequestParam("userName") String userName) {
+        if (StringUtils.isNullOrEmpty(userName))
+            throw new RuntimeException(CommonEnum.NO_USER_NAME_INPUT.getMessage());
+
+        ArticleListResponse response = new ArticleListResponse();
+        List<ArticleStation> list = new ArrayList<>();
+        list = articleService.getArticleListByUserName(userName);
+        response.setList(list);
+        return response;
+    }
+
 
     @PostMapping(value = "/head_portrait/add", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public ImageInsertResponse addHeadPortrait(
