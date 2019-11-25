@@ -28,4 +28,6 @@ public interface ArticleCollectionStationMapper {
     Integer insertCorpusWithArticles(@Param("corpus") ArticleCollectionStation corpus, @Param("articles") List<ArticleStation> articles);
 
     Integer deleteCorpusWithNoArticle(@Param("corpus") ArticleCollectionStation corpus);
+
+    List<ArticleCollectionStation> getCorpusWithArticlesByUserName(@Param("userName") String userName);
 }

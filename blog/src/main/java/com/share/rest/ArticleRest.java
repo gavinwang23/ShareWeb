@@ -6,6 +6,7 @@ import com.share.entity.dao.ArticleCollectionStation;
 import com.share.entity.dao.ArticleStation;
 import com.share.entity.BaseJsonResponse;
 import com.share.entity.response.ArticleListResponse;
+import com.share.entity.response.CorpusWithArticlesResponse;
 import com.share.entity.response.ImageInsertResponse;
 import com.share.service.ArticleService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -100,7 +101,8 @@ public class ArticleRest extends BaseController {
         return response;
     }
 
-    @GetMapping(value = "/artciles/get")
+    //通过用户名强行获取所有文章
+    @GetMapping(value = "/articles/get")
     public ArticleListResponse getArticles(@RequestParam("userName") String userName) {
         if (StringUtils.isNullOrEmpty(userName))
             throw new RuntimeException(CommonEnum.NO_USER_NAME_INPUT.getMessage());
@@ -112,6 +114,16 @@ public class ArticleRest extends BaseController {
         return response;
     }
 
+    //获取文集,以及文集下的所有文章
+    @GetMapping(value = "/corpus/get")
+    public CorpusWithArticlesResponse getCorpusWithArticles(@RequestParam("userName") String userName) {
+        if (StringUtils.isNullOrEmpty(userName))
+            throw new RuntimeException(CommonEnum.NO_USER_NAME_INPUT.getMessage());
+
+        CorpusWithArticlesResponse response = new CorpusWithArticlesResponse();
+        response = articleService.getCorpusWithArticlesByUserName(userName);
+        return response;
+    }
 
     @PostMapping(value = "/head_portrait/add", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public ImageInsertResponse addHeadPortrait(

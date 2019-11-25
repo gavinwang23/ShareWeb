@@ -4,10 +4,15 @@ import com.share.dao.mapper.ArticleCollectionStationMapper;
 import com.share.dao.mapper.ArticleStationMapper;
 import com.share.entity.dao.ArticleCollectionStation;
 import com.share.entity.dao.ArticleStation;
+import com.share.entity.response.CorpusWithArticles;
+import com.share.entity.response.CorpusWithArticlesResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 @Service
 public class ArticleService {
@@ -40,5 +45,26 @@ public class ArticleService {
 
     public List<ArticleStation> getArticleListByUserName(String userName) {
         return articleStationMapper.getArticleListByUserName(userName);
+    }
+
+    public CorpusWithArticlesResponse getCorpusWithArticlesByUserName(String userName) {
+        CorpusWithArticlesResponse response = new CorpusWithArticlesResponse();
+        List<ArticleCollectionStation> list = articleCollectionStationMapper.getCorpusWithArticlesByUserName(userName);
+        if (list == null || list.size() == 0)
+            return response;
+
+        List<CorpusWithArticles> corpusWithArticles = new ArrayList<>();
+        Map<String, List<ArticleCollectionStation>> map = list.stream().collect(Collectors.groupingBy(ArticleCollectionStation::getCollectionName));
+        for (Map.Entry<String, List<ArticleCollectionStation>> entry : map.entrySet()) {
+            CorpusWithArticles corpus = new CorpusWithArticles();
+            String key = entry.getKey();
+            List<ArticleCollectionStation> articleCollectionStationList = entry.getValue();
+            List<String> tempList = articleCollectionStationList.stream().map(articleCollectionStation -> articleCollectionStation.getArticleName()).collect(Collectors.toList());
+            corpus.setCorpusName(entry.getKey());
+            corpus.setArticles(tempList);
+            corpusWithArticles.add(corpus);
+        }
+        response.setCorpus(corpusWithArticles);
+        return response;
     }
 }

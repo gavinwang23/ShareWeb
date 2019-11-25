@@ -31,6 +31,16 @@
     from article_collection_station
     where id = #{id,jdbcType=BIGINT}
   </select>
+
+  <select id="getCorpusWithArticlesByUserName" resultMap="ResultMapWithBLOBs">
+    select
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from article_collection_station
+    where user_name = #{userName,jdbcType=VARCHAR}
+  </select>
+
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
     delete from article_collection_station
     where id = #{id,jdbcType=BIGINT}
