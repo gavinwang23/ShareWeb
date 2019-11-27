@@ -25,7 +25,7 @@ import java.util.List;
 @ResponseBody
 public class ArticleRest extends BaseController {
 
-    @Value("${system.static.files.path}")
+    @Value("${system.static.files.pa/th}")
     private String filePath;
 
     @Value("${system.static.files.headPortrait}")
@@ -134,7 +134,7 @@ public class ArticleRest extends BaseController {
     }
 
     @PostMapping(value = "/corpus/add")
-    public BaseJsonResponse addCorpus(@RequestParam("corpus") ArticleCollectionStation corpus,
+    public BaseJsonResponse addCorpus(@RequestBody ArticleCollectionStation corpus,
                                       @RequestParam(value = "articles", required = false) List<ArticleStation> articles) {
         if (corpus == null || StringUtils.isNullOrEmpty(corpus.getCollectionName()))
             throw new RuntimeException(CommonEnum.NO_CONTENT_INPUT.getMessage());
