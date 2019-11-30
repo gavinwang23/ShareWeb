@@ -34,8 +34,9 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         try {
             if (StringUtils.isNotBlank(jwtToken) && jwtToken.startsWith("Bearer")) {
                 jwtToken = jwtToken.replace("Bearer ", "");
-                getAuthenticationContext(jwtToken);
-
+                Authentication authentication = getAuthenticationContext(jwtToken);
+                String token = jwtTokenProvider.createJwtToken(authentication);
+                response.setHeader("Authorization", token);
             } else {
                 log.error(request.getParameter("username") + ": Token is null.");
             }
@@ -48,10 +49,11 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         return;
     }
 
-    private void getAuthenticationContext(String jwtToken) {
+    private Authentication getAuthenticationContext(String jwtToken) {
             String username = jwtTokenProvider.getUsernameFromJwt(jwtToken);
             UserDetails userDetails = databaseUserDetailsService.getUserDetailsByUsername(username);
             Authentication authentication = new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
             SecurityContextHolder.getContext().setAuthentication(authentication);
+            return authentication;
     }
 }
