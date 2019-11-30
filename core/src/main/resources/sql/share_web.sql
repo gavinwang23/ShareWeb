@@ -18,6 +18,22 @@ SET NAMES utf8mb4;
 SET FOREIGN_KEY_CHECKS = 0;
 
 -- ----------------------------
+-- Table structure for index_information_station
+-- ----------------------------
+DROP TABLE IF EXISTS `index_information_station`;
+CREATE TABLE `index_information_station`  (
+  `id` bigint(10) NOT NULL COMMENT '自增id',
+  `user_name` varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '用户名',
+  `index_article_name` varchar(64) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '首页文章名称',
+  `index_picture_address` varchar(64) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '首页图片地址',
+  `create_time` datetime(0) NULL DEFAULT NULL COMMENT '创建时间',
+  `state` enum('EN','DIS') CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '状态',
+  `index_article_id` bigint(10) NULL DEFAULT NULL COMMENT '文章id',
+  PRIMARY KEY (`id`) USING BTREE,
+  INDEX `common_index`(`user_name`, `index_article_name`, `state`) USING BTREE COMMENT '普通索引'
+) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
 -- Table structure for article_collection_station
 -- ----------------------------
 DROP TABLE IF EXISTS `article_collection_station`;

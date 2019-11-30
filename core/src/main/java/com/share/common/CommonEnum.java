@@ -4,6 +4,7 @@ public enum CommonEnum {
     USER_ROLE_ADMIN(0, "ADMIN"), USER_ROLE_COMMON(0, "COMMON"),
     USER_ROLE_GUEST(0, "GUEST"), UTF_8(0, "UTF-8"),
     APPLICATION_JSON(0, "application/json"),
+    ENABLE(0, "EN"),
 
 
     //一些常用警告

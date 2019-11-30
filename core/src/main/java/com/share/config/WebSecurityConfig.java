@@ -64,7 +64,7 @@ public class WebSecurityConfig {
                     .and().csrf().disable()
                     .authorizeRequests()
                     .antMatchers("/static/**", "/index.jsp", "/api/sign_up",
-                            "/api/logout", "/api/is_username_duplicated/**", "/api/test",
+                            "/api/logout", "/api/is_username_duplicated/**", "index_info/get",
                             "/api/verify_code")
                     .permitAll()
                     .antMatchers(HttpMethod.OPTIONS)
