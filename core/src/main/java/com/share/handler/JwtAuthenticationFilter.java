@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
@@ -34,8 +35,8 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         try {
             if (StringUtils.isNotBlank(jwtToken) && jwtToken.startsWith("Bearer")) {
                 jwtToken = jwtToken.replace("Bearer ", "");
-                Authentication authentication = getAuthenticationContext(jwtToken);
-                String token = jwtTokenProvider.createJwtToken(authentication);
+                String username = getAuthenticationContext(jwtToken);
+                String token = jwtTokenProvider.createJwtToken(username);
                 response.setHeader("Authorization", token);
             } else {
                 log.error(request.getParameter("username") + ": Token is null.");
@@ -49,11 +50,11 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         return;
     }
 
-    private Authentication getAuthenticationContext(String jwtToken) {
+    private String getAuthenticationContext(String jwtToken) {
             String username = jwtTokenProvider.getUsernameFromJwt(jwtToken);
             UserDetails userDetails = databaseUserDetailsService.getUserDetailsByUsername(username);
             Authentication authentication = new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
             SecurityContextHolder.getContext().setAuthentication(authentication);
-            return authentication;
+            return username;
     }
 }

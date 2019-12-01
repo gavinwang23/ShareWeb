@@ -37,6 +37,17 @@ public class JwtTokenProvider {
         return token;
     }
 
+    public String createJwtToken(String userName) {
+        Date expireTime = new Date(System.currentTimeMillis() + EXPIRE_TIME);
+        String token = Jwts.builder().setSubject(userName)
+                .setExpiration(expireTime)
+                .setIssuedAt(new Date())
+                .signWith(SignatureAlgorithm.HS512, SECRET)
+                .compact();
+
+        return token;
+    }
+
     public String createJwtTokenWhenSignUp(UsersStation usersStation) {
         String username = usersStation.getUserName();
         Date expireTime = new Date(System.currentTimeMillis() + EXPIRE_TIME);
