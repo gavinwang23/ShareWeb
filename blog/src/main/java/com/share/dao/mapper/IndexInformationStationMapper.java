@@ -25,4 +25,6 @@ public interface IndexInformationStationMapper {
     List<IndexInformationStation> getIndexInformationListByState(@Param("state") String state);
 
     void addIndexInformation(@Param("indexList") List<IndexInformationStation> list);
+
+    void deleteIndexInfoByUserName(@Param("userName") String userName, @Param("indexArticleName") String indexArticleName, @Param("indexArticleId") Long indexArticleId);
 }

@@ -40,4 +40,14 @@ public class IndexRest extends BaseController {
         return response;
     }
 
+    @GetMapping("index_info/delete")
+    @PreAuthorize("hasAnyAuthority('ADMIN')")
+    public BaseJsonResponse deleteIndexInformation(@RequestParam("userName") String userName,
+                                                   @RequestParam("indexArticleName") String indexArticleName,
+                                                   @RequestParam(name = "indexArticleId", required = false) Long indexArticleId) {
+
+        indexService.deleteIndexInfoByUserName(userName, indexArticleName, indexArticleId);
+        return new BaseJsonResponse();
+    }
+
 }
