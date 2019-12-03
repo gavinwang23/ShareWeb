@@ -60,10 +60,13 @@ public class IndexRest extends BaseController {
     }
 
     @GetMapping(value = "/articles/get")
-    public ArticleListResponse getArticles() {
+    public ArticleListResponse getArticles(
+        @RequestParam(name = "pageNo", required = false) Integer pageNo,
+        @RequestParam(name = "pageSize", required = false) Integer pageSize
+    ) {
         ArticleListResponse response = new ArticleListResponse();
         List<ArticleStation> list = new ArrayList<>();
-        list = articleService.getArticleListInIndex();
+        list = articleService.getArticleListInIndex(pageNo, pageSize);
         response.setList(list);
         return response;
     }
