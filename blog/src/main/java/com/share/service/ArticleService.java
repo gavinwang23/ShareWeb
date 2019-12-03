@@ -67,4 +67,13 @@ public class ArticleService {
         response.setCorpus(corpusWithArticles);
         return response;
     }
+
+    public List<ArticleStation> getArticleListInIndex() {
+        return getArticleListInIndex(1, 10);
+    }
+
+    public List<ArticleStation> getArticleListInIndex(Integer pageNo, Integer pageSize) {
+        return articleStationMapper.getArticleListInIndex(pageNo, pageSize);
+    }
+
 }

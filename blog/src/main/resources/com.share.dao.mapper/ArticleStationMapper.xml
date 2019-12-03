@@ -43,6 +43,14 @@
     where user_name = #{userName,jdbcType=VARCHAR}
   </select>
 
+  <select id="getArticleListInIndex" resultMap="ResultMapWithBLOBs">
+    select
+    <include refid="Base_Column_List" />
+    ,
+    left(article_content, 200) as `article_content`
+    from article_station order by `id` desc limit (#{pageNo, jdbcType=INTEGER} - 1) * #{pageSize, jdbcType=INTEGER}, #{pageSize, jdbcType=INTEGER}
+  </select>
+
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
     delete from article_station
     where id = #{id,jdbcType=BIGINT}

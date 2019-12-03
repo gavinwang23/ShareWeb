@@ -1,9 +1,14 @@
 package com.share.rest;
 
+import com.mysql.cj.util.StringUtils;
 import com.share.common.CommonEnum;
+import com.share.dao.mapper.ArticleStationMapper;
 import com.share.entity.BaseJsonResponse;
+import com.share.entity.dao.ArticleStation;
 import com.share.entity.dao.IndexInformationStation;
+import com.share.entity.response.ArticleListResponse;
 import com.share.entity.response.IndexInformationResponse;
+import com.share.service.ArticleService;
 import com.share.service.IndexService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -11,6 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -21,6 +27,9 @@ public class IndexRest extends BaseController {
 
     @Autowired
     private IndexService indexService;
+
+    @Autowired
+    private ArticleService articleService;
 
     @GetMapping("index_info/get")
     public IndexInformationResponse getIndexInformation() {
@@ -48,6 +57,15 @@ public class IndexRest extends BaseController {
 
         indexService.deleteIndexInfoByUserName(userName, indexArticleName, indexArticleId);
         return new BaseJsonResponse();
+    }
+
+    @GetMapping(value = "/articles/get")
+    public ArticleListResponse getArticles() {
+        ArticleListResponse response = new ArticleListResponse();
+        List<ArticleStation> list = new ArrayList<>();
+        list = articleService.getArticleListInIndex();
+        response.setList(list);
+        return response;
     }
 
 }
