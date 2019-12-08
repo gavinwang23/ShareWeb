@@ -27,6 +27,15 @@
     where state = #{state, jdbcType=CHAR}
   </select>
 
+  <select id="deleteIndexInfoByUserName" parameterType="java.lang.Long">
+    delete from index_information_station
+    where user_name = #{userName, jdbcType=VARCHAR}
+    and index_article_name = #{indexArticleName,jdbcType=VARCHAR}
+    <if test="index_article_id != null">
+      and index_article_id = #{indexArticleId,jdbcType=BIGINT}
+    </if>
+  </select>
+
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
     delete from index_information_station
     where id = #{id,jdbcType=BIGINT}

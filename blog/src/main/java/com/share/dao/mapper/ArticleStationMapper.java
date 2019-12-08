@@ -25,4 +25,6 @@ public interface ArticleStationMapper {
     int updateByPrimaryKey(ArticleStation record);
 
     List<ArticleStation> getArticleListByUserName(@Param("userName") String userName);
+
+    List<ArticleStation> getArticleListInIndex(@Param("pageNo") Integer pageNo, @Param("pageSize") Integer pageSize);
 }

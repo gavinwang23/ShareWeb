@@ -20,4 +20,8 @@ public class IndexService {
     public void addIndexInformation(List<IndexInformationStation> list) {
         indexInformationStationMapper.addIndexInformation(list);
     }
+
+    public void deleteIndexInfoByUserName(String userName, String indexArticleName, Long indexArticleId) {
+        indexInformationStationMapper.deleteIndexInfoByUserName(userName, indexArticleName, indexArticleId);
+    }
 }

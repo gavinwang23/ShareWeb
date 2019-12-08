@@ -63,9 +63,17 @@ public class WebSecurityConfig {
                     .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                     .and().csrf().disable()
                     .authorizeRequests()
-                    .antMatchers("/static/**", "/index.jsp", "/api/sign_up",
-                            "/api/logout", "/api/is_username_duplicated/**", "index_info/get",
-                            "/api/verify_code")
+                    .antMatchers(
+                "/static/**",
+                            "/index.jsp",
+                            "/api/sign_up",
+                            "/api/logout",
+                            "/api/is_username_duplicated/**",
+                            "index_info/get",
+                            "/api/verify_code",
+                            "/api/index/articles/get"
+
+                    )
                     .permitAll()
                     .antMatchers(HttpMethod.OPTIONS)
                     .permitAll()
