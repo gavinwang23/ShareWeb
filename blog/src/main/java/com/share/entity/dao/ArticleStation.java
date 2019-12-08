@@ -29,6 +29,16 @@ public class ArticleStation {
 
     private String articleContent;
 
+    private String articleType;
+
+    public String getArticleType() {
+        return articleType;
+    }
+
+    public void setArticleType(String articleType) {
+        this.articleType = articleType;
+    }
+
     public Long getId() {
         return id;
     }
