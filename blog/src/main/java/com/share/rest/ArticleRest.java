@@ -103,13 +103,23 @@ public class ArticleRest extends BaseController {
 
     //通过用户名强行获取所有文章
     @GetMapping(value = "/articles/get")
-    public ArticleListResponse getArticles(@RequestParam("userName") String userName) {
+    public ArticleListResponse getArticles(
+        @RequestParam("userName") String userName,
+        @RequestParam(value = "corpusName", required = false) String corpusName
+        ) {
         if (StringUtils.isNullOrEmpty(userName))
             throw new RuntimeException(CommonEnum.NO_USER_NAME_INPUT.getMessage());
 
-        ArticleListResponse response = new ArticleListResponse();
         List<ArticleStation> list = new ArrayList<>();
-        list = articleService.getArticleListByUserName(userName);
+        if (StringUtils.isNullOrEmpty(corpusName)) {
+            ArticleListResponse response = new ArticleListResponse();
+            list = articleService.getArticleListByUserName(userName);
+            response.setList(list);
+            return response;
+        }
+        
+        ArticleListResponse response = new ArticleListResponse();
+        list = articleService.getArticlesByUserNameAndCorpusName(userName, corpusName);
         response.setList(list);
         return response;
     }

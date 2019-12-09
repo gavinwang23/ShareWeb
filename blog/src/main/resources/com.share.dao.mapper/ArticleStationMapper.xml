@@ -44,6 +44,18 @@
     where user_name = #{userName,jdbcType=VARCHAR}
   </select>
 
+  <select id="getArticlesByUserNameAndCorpusName" resultMap="ResultMapWithBLOBs">
+    select
+    b.id, b.article_title, b.article_admire, b.user_name, b.article_oppose, b.article_brose,
+    b.article_publish_time, b.article_id_edit, b.article_edit_time, b.can_be_reprint,
+    b.reprint_user_name, b.reprint_link, b.article_type, b.article_content
+    from article_collection_station a left join article_station b on a.user_name = b.user_name and
+    a.article_name = b.article_title
+    where a.user_name = #{userName,jdbcType=VARCHAR} and
+    a.collection_name = #{corpusName,jdbcType=VARCHAR}
+    order by b.article_publish_time desc, b.id desc
+  </select>
+
   <select id="getArticleListInIndex" resultMap="ResultMapWithBLOBs">
     select
     <include refid="Base_Column_List" />

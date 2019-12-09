@@ -78,4 +78,8 @@ public class ArticleService {
         return articleStationMapper.getArticleListInIndex((pageNo - 1) * pageSize, pageSize);
     }
 
+	public List<ArticleStation> getArticlesByUserNameAndCorpusName(String userName, String corpusName) {
+		return articleCollectionStationMapper.getArticlesByUserNameAndCorpusName(userName, corpusName);
+	}
+
 }

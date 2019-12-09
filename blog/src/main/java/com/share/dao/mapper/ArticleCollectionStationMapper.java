@@ -30,4 +30,6 @@ public interface ArticleCollectionStationMapper {
     Integer deleteCorpusWithNoArticle(@Param("corpus") ArticleCollectionStation corpus);
 
     List<ArticleCollectionStation> getCorpusWithArticlesByUserName(@Param("userName") String userName);
+
+	List<ArticleStation> getArticlesByUserNameAndCorpusName(@Param("userName") String userName, @Param("corpusName") String corpusName);
 }
