@@ -74,8 +74,8 @@ public class ArticleService {
 
     public List<ArticleStation> getArticleListInIndex(Integer pageNo, Integer pageSize) {
         if (pageNo == null || pageSize == null)
-            return articleStationMapper.getArticleListInIndex(1, 10);
-        return articleStationMapper.getArticleListInIndex(pageNo, pageSize);
+            return articleStationMapper.getArticleListInIndex(0, 10);
+        return articleStationMapper.getArticleListInIndex((pageNo - 1) * pageSize, pageSize);
     }
 
 }

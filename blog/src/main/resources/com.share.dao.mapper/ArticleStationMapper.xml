@@ -49,7 +49,7 @@
     <include refid="Base_Column_List" />
     ,
     <include refid="Blob_Column_List" />
-    from article_station order by `id` desc limit (#{pageNo, jdbcType=INTEGER} - 1) * #{pageSize, jdbcType=INTEGER}, #{pageSize, jdbcType=INTEGER}
+    from article_station order by `id` desc limit #{pageNo, jdbcType=INTEGER}, #{pageSize, jdbcType=INTEGER}
   </select>
 
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
