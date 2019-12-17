@@ -27,4 +27,7 @@ public interface ArticleStationMapper {
     List<ArticleStation> getArticleListByUserName(@Param("userName") String userName);
 
     List<ArticleStation> getArticleListInIndex(@Param("pageNo") Integer pageNo, @Param("pageSize") Integer pageSize);
+
+    List<ArticleStation> getArticleByUserNameAndArticleTitle(@Param("userName") String userName, @Param("articleTitle") String articleTitle);
+
 }

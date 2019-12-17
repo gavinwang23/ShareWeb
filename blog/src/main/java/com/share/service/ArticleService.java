@@ -82,4 +82,8 @@ public class ArticleService {
 		return articleCollectionStationMapper.getArticlesByUserNameAndCorpusName(userName, corpusName);
 	}
 
+    public List<ArticleStation> getArticleByUserNameAndArticleTitle(String userName, String articleTitle) {
+        return articleStationMapper.getArticleByUserNameAndArticleTitle(userName, articleTitle);
+    }
+
 }

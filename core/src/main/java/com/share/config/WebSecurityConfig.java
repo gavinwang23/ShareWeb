@@ -69,6 +69,7 @@ public class WebSecurityConfig {
                             "/api/sign_up",
                             "/api/logout",
                             "/api/is_username_duplicated/**",
+
                             "index_info/get",
                             "/api/verify_code",
                             "/api/index/articles/get"

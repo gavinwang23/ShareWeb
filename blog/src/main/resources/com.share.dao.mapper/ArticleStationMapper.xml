@@ -64,6 +64,14 @@
     from article_station order by `id` desc limit #{pageNo, jdbcType=INTEGER}, #{pageSize, jdbcType=INTEGER}
   </select>
 
+  <select id="getArticleByUserNameAndArticleTitle" resultMap="ResultMapWithBLOBs">
+    select
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from article_station where user_name = #{userName, jdbcType=VARCHAR} and article_title = #{articleTitle, jdbcType=VARCHAR}
+  </select>
+
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
     delete from article_station
     where id = #{id,jdbcType=BIGINT}

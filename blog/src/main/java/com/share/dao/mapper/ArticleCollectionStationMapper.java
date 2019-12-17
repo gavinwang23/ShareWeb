@@ -32,4 +32,6 @@ public interface ArticleCollectionStationMapper {
     List<ArticleCollectionStation> getCorpusWithArticlesByUserName(@Param("userName") String userName);
 
 	List<ArticleStation> getArticlesByUserNameAndCorpusName(@Param("userName") String userName, @Param("corpusName") String corpusName);
+
+
 }

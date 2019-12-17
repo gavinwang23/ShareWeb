@@ -165,4 +165,20 @@ public class ArticleRest extends BaseController {
         return new BaseJsonResponse();
     }
 
+    @GetMapping(value = "article/get")
+    public ArticleListResponse getArticle(
+            @RequestParam("userName") String userName,
+            @RequestParam("articleTitle") String articleTitle
+    ){
+        if (StringUtils.isNullOrEmpty(userName))
+            throw new RuntimeException(CommonEnum.NO_USER_NAME_INPUT.getMessage());
+
+        List<ArticleStation> list = new ArrayList<>();
+
+        ArticleListResponse response = new ArticleListResponse();
+        list = articleService.getArticleByUserNameAndArticleTitle(userName, articleTitle);
+        response.setList(list);
+        return response;
+    }
+
 }
