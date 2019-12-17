@@ -72,7 +72,8 @@ public class WebSecurityConfig {
 
                             "index_info/get",
                             "/api/verify_code",
-                            "/api/index/articles/get"
+                            "/api/index/articles/get",
+                            "/api/article/get"
 
                     )
                     .permitAll()
