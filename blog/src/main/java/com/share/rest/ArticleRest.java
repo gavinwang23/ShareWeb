@@ -117,7 +117,7 @@ public class ArticleRest extends BaseController {
             response.setList(list);
             return response;
         }
-        
+
         ArticleListResponse response = new ArticleListResponse();
         list = articleService.getArticlesByUserNameAndCorpusName(userName, corpusName);
         response.setList(list);
@@ -177,6 +177,21 @@ public class ArticleRest extends BaseController {
 
         ArticleListResponse response = new ArticleListResponse();
         list = articleService.getArticleByUserNameAndArticleTitle(userName, articleTitle);
+        response.setList(list);
+        return response;
+    }
+
+    @GetMapping(value = "follower_articles/get")
+    public ArticleListResponse getFollowerArticles(
+            @RequestParam("userName") String userName
+    ){
+        if (StringUtils.isNullOrEmpty(userName))
+            throw new RuntimeException(CommonEnum.NO_USER_NAME_INPUT.getMessage());
+
+        List<ArticleStation> list = new ArrayList<>();
+
+        ArticleListResponse response = new ArticleListResponse();
+        list = articleService.getFollowerArticlesByUserName(userName);
         response.setList(list);
         return response;
     }

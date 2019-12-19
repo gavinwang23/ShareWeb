@@ -86,4 +86,8 @@ public class ArticleService {
         return articleStationMapper.getArticleByUserNameAndArticleTitle(userName, articleTitle);
     }
 
+    public List<ArticleStation> getFollowerArticlesByUserName(String userName) {
+        return articleStationMapper.getFollowerArticlesByUserName(userName);
+    }
+
 }

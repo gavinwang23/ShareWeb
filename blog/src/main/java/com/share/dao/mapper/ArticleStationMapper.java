@@ -30,4 +30,6 @@ public interface ArticleStationMapper {
 
     List<ArticleStation> getArticleByUserNameAndArticleTitle(@Param("userName") String userName, @Param("articleTitle") String articleTitle);
 
+    List<ArticleStation> getFollowerArticlesByUserName(@Param("userName") String userName);
+
 }
