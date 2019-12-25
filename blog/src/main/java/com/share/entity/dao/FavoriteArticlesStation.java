@@ -1,6 +1,6 @@
 package com.share.entity.dao;
 
-public class FavoriteArticleStation {
+public class FavoriteArticlesStation {
     private Long id;
 
     private String userName;

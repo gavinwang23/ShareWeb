@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.share.dao.mapper.FavoriteArticleStationMapper">
-  <resultMap id="BaseResultMap" type="com.share.dao.mapper.FavoriteArticleStation">
+<mapper namespace="com.share.dao.mapper.FavoriteArticlesStationMapper">
+  <resultMap id="BaseResultMap" type="com.share.dao.mapper.FavoriteArticlesStation">
     <id column="id" jdbcType="BIGINT" property="id" />
     <result column="user_name" jdbcType="VARCHAR" property="userName" />
     <result column="author_name" jdbcType="VARCHAR" property="authorName" />
@@ -13,21 +13,21 @@
   <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
     select
     <include refid="Base_Column_List" />
-    from favorite_article_station
+    from favorite_articles_station
     where id = #{id,jdbcType=BIGINT}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
-    delete from favorite_article_station
+    delete from favorite_articles_station
     where id = #{id,jdbcType=BIGINT}
   </delete>
-  <insert id="insert" parameterType="test.test.FavoriteArticleStation">
-    insert into favorite_article_station (id, user_name, author_name,
+  <insert id="insert" parameterType="test.test.FavoriteArticlesStation">
+    insert into favorite_articles_station (id, user_name, author_name,
       article_title)
     values (#{id,jdbcType=BIGINT}, #{userName,jdbcType=VARCHAR}, #{authorName,jdbcType=VARCHAR},
       #{articleTitle,jdbcType=VARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="test.test.FavoriteArticleStation">
-    insert into favorite_article_station
+  <insert id="insertSelective" parameterType="test.test.FavoriteArticlesStation">
+    insert into favorite_articles_station
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">
         id,
@@ -57,8 +57,8 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="test.test.FavoriteArticleStation">
-    update favorite_article_station
+  <update id="updateByPrimaryKeySelective" parameterType="test.test.FavoriteArticlesStation">
+    update favorite_articles_station
     <set>
       <if test="userName != null">
         user_name = #{userName,jdbcType=VARCHAR},
@@ -72,8 +72,8 @@
     </set>
     where id = #{id,jdbcType=BIGINT}
   </update>
-  <update id="updateByPrimaryKey" parameterType="test.test.FavoriteArticleStation">
-    update favorite_article_station
+  <update id="updateByPrimaryKey" parameterType="test.test.FavoriteArticlesStation">
+    update favorite_articles_station
     set user_name = #{userName,jdbcType=VARCHAR},
       author_name = #{authorName,jdbcType=VARCHAR},
       article_title = #{articleTitle,jdbcType=VARCHAR}
