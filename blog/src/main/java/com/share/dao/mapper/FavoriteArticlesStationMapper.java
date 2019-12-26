@@ -1,8 +1,12 @@
 package com.share.dao.mapper;
 
+import com.share.entity.dao.ArticleStation;
 import com.share.entity.dao.FavoriteArticlesStation;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Component;
+
+import java.util.List;
 
 @Mapper
 @Component
@@ -18,4 +22,6 @@ public interface FavoriteArticlesStationMapper {
     int updateByPrimaryKeySelective(FavoriteArticlesStation record);
 
     int updateByPrimaryKey(FavoriteArticlesStation record);
+
+    List<ArticleStation> getFavoriteArticlesByUserName(@Param("userName") String userName);
 }

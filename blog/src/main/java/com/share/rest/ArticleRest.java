@@ -196,4 +196,19 @@ public class ArticleRest extends BaseController {
         return response;
     }
 
+    @GetMapping(value = "favorite_articles/get")
+    public ArticleListResponse getFavoriteArticles(
+            @RequestParam("userName") String userName
+    ){
+        if (StringUtils.isNullOrEmpty(userName))
+            throw new RuntimeException(CommonEnum.NO_USER_NAME_INPUT.getMessage());
+
+        List<ArticleStation> list = new ArrayList<>();
+
+        ArticleListResponse response = new ArticleListResponse();
+        list = articleService.getFavoriteArticlesByUserName(userName);
+        response.setList(list);
+        return response;
+    }
+
 }

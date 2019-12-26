@@ -2,8 +2,10 @@ package com.share.service;
 
 import com.share.dao.mapper.ArticleCollectionStationMapper;
 import com.share.dao.mapper.ArticleStationMapper;
+import com.share.dao.mapper.FavoriteArticlesStationMapper;
 import com.share.entity.dao.ArticleCollectionStation;
 import com.share.entity.dao.ArticleStation;
+import com.share.entity.dao.FavoriteArticlesStation;
 import com.share.entity.response.CorpusWithArticles;
 import com.share.entity.response.CorpusWithArticlesResponse;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +24,9 @@ public class ArticleService {
 
     @Autowired
     private ArticleCollectionStationMapper articleCollectionStationMapper;
+
+    @Autowired
+    private FavoriteArticlesStationMapper favoriteArticlesStationMapper;
 
     public ArticleStation selectByPrimaryKey(Long id) {
         return articleStationMapper.selectByPrimaryKey(id);
@@ -88,6 +93,10 @@ public class ArticleService {
 
     public List<ArticleStation> getFollowerArticlesByUserName(String userName) {
         return articleStationMapper.getFollowerArticlesByUserName(userName);
+    }
+
+    public List<ArticleStation> getFavoriteArticlesByUserName(String userName) {
+        return favoriteArticlesStationMapper.getFavoriteArticlesByUserName(userName);
     }
 
 }
