@@ -1,7 +1,11 @@
 package com.share.dao.mapper;
 
 import com.share.entity.dao.FavoriteArticlesStation;
+import org.apache.ibatis.annotations.Mapper;
+import org.springframework.stereotype.Component;
 
+@Mapper
+@Component
 public interface FavoriteArticlesStationMapper {
     int deleteByPrimaryKey(Long id);
 

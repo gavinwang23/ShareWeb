@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.share.dao.mapper.FavoriteArticlesStationMapper">
-  <resultMap id="BaseResultMap" type="com.share.dao.mapper.FavoriteArticlesStation">
+  <resultMap id="BaseResultMap" type="com.share.entity.dao.FavoriteArticlesStation">
     <id column="id" jdbcType="BIGINT" property="id" />
     <result column="user_name" jdbcType="VARCHAR" property="userName" />
     <result column="author_name" jdbcType="VARCHAR" property="authorName" />
@@ -20,13 +20,13 @@
     delete from favorite_articles_station
     where id = #{id,jdbcType=BIGINT}
   </delete>
-  <insert id="insert" parameterType="test.test.FavoriteArticlesStation">
+  <insert id="insert" parameterType="com.share.entity.dao.FavoriteArticlesStation">
     insert into favorite_articles_station (id, user_name, author_name,
       article_title)
     values (#{id,jdbcType=BIGINT}, #{userName,jdbcType=VARCHAR}, #{authorName,jdbcType=VARCHAR},
       #{articleTitle,jdbcType=VARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="test.test.FavoriteArticlesStation">
+  <insert id="insertSelective" parameterType="com.share.entity.dao.FavoriteArticlesStation">
     insert into favorite_articles_station
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -57,7 +57,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="test.test.FavoriteArticlesStation">
+  <update id="updateByPrimaryKeySelective" parameterType="com.share.entity.dao.FavoriteArticlesStation">
     update favorite_articles_station
     <set>
       <if test="userName != null">
@@ -72,7 +72,7 @@
     </set>
     where id = #{id,jdbcType=BIGINT}
   </update>
-  <update id="updateByPrimaryKey" parameterType="test.test.FavoriteArticlesStation">
+  <update id="updateByPrimaryKey" parameterType="com.share.entity.dao.FavoriteArticlesStation">
     update favorite_articles_station
     set user_name = #{userName,jdbcType=VARCHAR},
       author_name = #{authorName,jdbcType=VARCHAR},
