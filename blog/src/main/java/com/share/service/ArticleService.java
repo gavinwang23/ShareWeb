@@ -99,4 +99,8 @@ public class ArticleService {
         return favoriteArticlesStationMapper.getFavoriteArticlesByUserName(userName);
     }
 
+    public List<ArticleStation> getCommentsByArticleTitle(String articleTitle) {
+        return articleStationMapper.getCommentsByArticleTitle(articleTitle);
+    }
+
 }

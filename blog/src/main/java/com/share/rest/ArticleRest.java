@@ -211,4 +211,17 @@ public class ArticleRest extends BaseController {
         return response;
     }
 
+    @GetMapping(value = "comments/get")
+    public ArticleListResponse getComments(
+            @RequestParam("articleTitle") String articleTitle
+    ){
+
+        List<ArticleStation> list = new ArrayList<>();
+
+        ArticleListResponse response = new ArticleListResponse();
+        list = articleService.getCommentsByArticleTitle(articleTitle);
+        response.setList(list);
+        return response;
+    }
+
 }

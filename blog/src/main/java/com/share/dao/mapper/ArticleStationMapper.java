@@ -32,4 +32,6 @@ public interface ArticleStationMapper {
 
     List<ArticleStation> getFollowerArticlesByUserName(@Param("userName") String userName);
 
+    List<ArticleStation> getCommentsByArticleTitle(@Param("articleTitle") String articleTitle);
+
 }
