@@ -1,5 +1,6 @@
 package com.share.dao.mapper;
 
+import com.share.entity.dao.ArticleCollectionStation;
 import com.share.entity.dao.ArticleStation;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
@@ -23,6 +24,8 @@ public interface ArticleStationMapper {
     int updateByPrimaryKeyWithBLOBs(ArticleStation record);
 
     int updateByPrimaryKey(ArticleStation record);
+
+    Integer insertCommentWithArticles(@Param("comment") ArticleStation comment, @Param("articles") List<ArticleStation> articles);
 
     List<ArticleStation> getArticleListByUserName(@Param("userName") String userName);
 

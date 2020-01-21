@@ -48,6 +48,10 @@ public class ArticleService {
         return articleCollectionStationMapper.deleteCorpusWithNoArticle(corpus);
     }
 
+    public Integer insertCommentWithArticles(ArticleStation comment, List<ArticleStation> articles) {
+        return articleStationMapper.insertCommentWithArticles(comment, articles);
+    }
+
     public List<ArticleStation> getArticleListByUserName(String userName) {
         return articleStationMapper.getArticleListByUserName(userName);
     }

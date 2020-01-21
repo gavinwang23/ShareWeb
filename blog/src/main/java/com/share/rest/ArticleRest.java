@@ -224,4 +224,28 @@ public class ArticleRest extends BaseController {
         return response;
     }
 
+    @PostMapping(value = "/comment/add")
+    public BaseJsonResponse addComment(@RequestBody ArticleStation comment,
+                                      @RequestParam(value = "articles", required = false) List<ArticleStation> articles) {
+        if (comment == null || StringUtils.isNullOrEmpty(comment.getArticleTitle()))
+            throw new RuntimeException(CommonEnum.NO_CONTENT_INPUT.getMessage());
+        if (comment.getArticlePublishTime() == null)
+            comment.setArticlePublishTime(new Date());
+
+            comment.setArticleOrComment(true);
+
+        if (articles == null || articles.size() == 0) {
+            Integer result = articleService.insertSelective(comment);
+            if (result != 0)
+                throw new RuntimeException(CommonEnum.SERVER_INTERNAL_ERROR.getMessage());
+        }
+
+        //articleService.deleteCorpusWithNoArticle(corpus);
+        Integer result = articleService.insertCommentWithArticles(comment, articles);
+        if (result != 0)
+            throw new RuntimeException(CommonEnum.SERVER_INTERNAL_ERROR.getMessage());
+
+        return new BaseJsonResponse();
+    }
+
 }
