@@ -27,17 +27,15 @@ public class ArticleStation {
 
     private String reprintLink;
 
-    private String articleContent;
-
     private String articleType;
 
-    public String getArticleType() {
-        return articleType;
-    }
+    private Boolean articleOrComment;
 
-    public void setArticleType(String articleType) {
-        this.articleType = articleType;
-    }
+    private Long targetedId;
+
+    private String targetedUserName;
+
+    private String articleContent;
 
     public Long getId() {
         return id;
@@ -133,6 +131,38 @@ public class ArticleStation {
 
     public void setReprintLink(String reprintLink) {
         this.reprintLink = reprintLink == null ? null : reprintLink.trim();
+    }
+
+    public String getArticleType() {
+        return articleType;
+    }
+
+    public void setArticleType(String articleType) {
+        this.articleType = articleType == null ? null : articleType.trim();
+    }
+
+    public Boolean getArticleOrComment() {
+        return articleOrComment;
+    }
+
+    public void setArticleOrComment(Boolean articleOrComment) {
+        this.articleOrComment = articleOrComment;
+    }
+
+    public Long getTargetedId() {
+        return targetedId;
+    }
+
+    public void setTargetedId(Long targetedId) {
+        this.targetedId = targetedId;
+    }
+
+    public String getTargetedUserName() {
+        return targetedUserName;
+    }
+
+    public void setTargetedUserName(String targetedUserName) {
+        this.targetedUserName = targetedUserName == null ? null : targetedUserName.trim();
     }
 
     public String getArticleContent() {
